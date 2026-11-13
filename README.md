@@ -2,7 +2,7 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![NCSC Research Edition](https://img.shields.io/badge/NCSC-Championship%20Edition-green.svg)](https://ncsc.co.in)
+[![NCSC Research Edition](https://img.shields.io/badge/NCSC-Research%20Edition-green.svg)](https://ncsc.co.in)
 [![Tests: 100% Passed](https://img.shields.io/badge/pytest-100%25%20Passed-brightgreen.svg)](tests/)
 
 > **A scientific agro-hydrological, physiological, and biometrical simulation framework paired with a standalone interactive HTML5 Field Simulator & Farmer Extension Advisory Web Application for Boro season lowland rice in Egra Sub-Division, Purba Medinipur, West Bengal, India.**
