@@ -4,6 +4,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![NCSC Research Edition](https://img.shields.io/badge/NCSC-Research%20Edition-green.svg)](https://ncsc.co.in)
 [![Tests: 100% Passed](https://img.shields.io/badge/pytest-100%25%20Passed-brightgreen.svg)](tests/)
+[![Live Interactive Dashboard](https://img.shields.io/badge/Live_Dashboard-Launch_Simulator-0284c7?style=for-the-badge&logo=googlechrome&logoColor=white)](https://htmlpreview.github.io/?https://github.com/GiTaDi-CrEaTe/EastMidnapore-AWD-NCSC/blob/main/docs/index.html)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live_App-15803d?style=for-the-badge&logo=github&logoColor=white)](https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/)
+
+> 🚀 **[Click Here to Launch the Live Interactive Research Dashboard & Field Simulator](https://htmlpreview.github.io/?https://github.com/GiTaDi-CrEaTe/EastMidnapore-AWD-NCSC/blob/main/docs/index.html)**  
+> *(Official GitHub Pages Mirror: [https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/](https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/) | Local: [docs/index.html](docs/index.html))*
 
 > **A scientific agro-hydrological, physiological, and biometrical simulation framework paired with a standalone interactive HTML5 Field Simulator & Farmer Extension Advisory Web Application for Boro season lowland rice in Egra Sub-Division, Purba Medinipur, West Bengal, India.**
 
@@ -135,20 +140,25 @@ All 6 figures are rendered at **$300\text{ DPI}$** in `figures/` (available in b
 
 ## 6. Standalone Interactive HTML5 Field Web Application (`docs/index.html`)
 
-The interactive web application in `docs/index.html` operates with **zero external dependencies and zero backend**. It is fully self-contained and ready to open locally or host on GitHub Pages:
+Access the live research web application directly in your web browser:
+* 🌐 **Live Web Application (Instant Browser Mirror):** **[Launch Live Interactive Dashboard](https://htmlpreview.github.io/?https://github.com/GiTaDi-CrEaTe/EastMidnapore-AWD-NCSC/blob/main/docs/index.html)**
+* 🚀 **GitHub Pages Mirror:** **[https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/](https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/)**
+* 💻 **Local File Access:** Open [docs/index.html](docs/index.html) directly in any web browser.
 
-* **Module 1 — Animated Perched Water Table & Root-Zone Simulator:**
-  * Interactive HTML5 Canvas displaying soil surface ($z = 0$), root zone ($0$ to $-15\text{ cm}$), perforated PVC Pani Pipe, capacitance sensor probe, and plough pan ($-22\text{ cm}$).
-  * Dynamic sliders for Reflood Threshold ($0$ to $-30\text{ cm}$) and Soil Specific Yield ($S_y$).
-  * Real-time readouts of $z$, volumetric moisture $\theta_v\%$, Bates proline, and hydraulic status alert.
-* **Module 2 — 20-Plot Field Map & Telemetry Inspector:**
-  * Interactive $4 \times 5$ plot grid; clicking any plot opens a telemetry drawer displaying complete hydrological, physiological, and yield component breakdowns.
-* **Module 3 — Multi-Chart Comparative Analytics:**
-  * Interactive SVG visualizations of the 110-day sawtooth dynamics and the Pareto calibration curve.
-* **Module 4 — Farmer Extension Advisory Calculator:**
-  * Input land area in **Bigha**, **Katha**, **Acre**, or **Hectare**.
-  * Choose between **Electric Submersible STW** or **Diesel Engine Pump**.
-  * Instant readout of groundwater saved (Litres & $\text{m}^3$), electricity ($\text{kWh}$) or diesel ($\text{L}$) saved, net financial savings ($\text{INR}$), and Pani Pipe payback time.
+> [!TIP]
+> **To enable official GitHub Pages hosting in 10 seconds:**
+> 1. In your repository on GitHub, go to **Settings** > **Pages**.
+> 2. Under **Build and deployment** > **Source**, choose **Deploy from a branch**.
+> 3. Under **Branch**, select `main` and directory `/docs`, then click **Save**.
+> 4. GitHub will automatically host the application live at `https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/`.
+
+The application operates with **zero external dependencies and zero backend**. It features:
+* **Coupled Subsurface Cross-Section (+10 to -30 cm):** Real-time canvas physics with animated deep percolation and capillary fringe flux arrows, PVC Pani Pipe water meniscus, and capacitive probe readout.
+* **Virtual Biochemical Assay Lab:** Interactive Acid-Ninhydrin Proline Spectrophotometer at 520 nm (toluene layer shifting from pale pink to deep crimson) + Leaf Turgor mesophyll cell diagram and SPAD meter.
+* **21-Plot Field Map & Logbook:** Heatmap layer switcher (Irrigation, WP, Yield, Proline) with click-to-inspect 110-day sawtooth hydrograph and Plot #21 spotlight.
+* **Judge's Challenge Mode:** Interactive threshold tester with live star placement on the Pareto curve proving the -15 cm optimum.
+* **110-Day Phenology Scrubber:** Crop development stages featuring the automatic **Flowering Guardrail** (Days 58–72 shallow submergence).
+* **Farmer Advisory & Calculator:** Land area in Bigha, Katha, Acre, and Hectare with electric vs. diesel pump economics, regional methane reduction, and English SMS alert card.
 
 ---
 
@@ -212,8 +222,8 @@ The interactive web application in `docs/index.html` operates with **zero extern
 
 ### 9.1 Installation
 ```bash
-git clone https://github.com/username/Purba-Medinipur-Rice-AWD-Simulation.git
-cd Purba-Medinipur-Rice-AWD-Simulation
+git clone https://github.com/GiTaDi-CrEaTe/EastMidnapore-AWD-NCSC.git
+cd EastMidnapore-AWD-NCSC
 pip install -r requirements.txt
 ```
 
@@ -221,10 +231,11 @@ pip install -r requirements.txt
 ```bash
 python3 scripts/run_all.py
 ```
-This executes the agro-hydrological model across all 20 RCBD plots, generates all 6 CSV datasets, renders all 6 300-DPI figures in `figures/`, and compiles `reports/NCSC_Statistical_and_Field_Report.md`.
+This executes the agro-hydrological model across all 20 RCBD plots, generates all 6 CSV datasets, renders all 6 300-DPI figures in `figures/`, compiles `reports/NCSC_Statistical_and_Field_Report.md`, and compiles `docs/index.html`.
 
-### 9.3 Launch the Interactive Web Application
-Open `docs/index.html` directly in any web browser:
+### 9.3 Launch the Interactive Research Dashboard
+* **Instant Web Access:** Click **[Launch Live Dashboard (HTMLPreview Mirror)](https://htmlpreview.github.io/?https://github.com/GiTaDi-CrEaTe/EastMidnapore-AWD-NCSC/blob/main/docs/index.html)** or visit **[GitHub Pages](https://gitadi-create.github.io/EastMidnapore-AWD-NCSC/)**
+* **Local Offline Access:** Open `docs/index.html` in your web browser:
 ```bash
 xdg-open docs/index.html   # On Linux
 open docs/index.html       # On macOS
