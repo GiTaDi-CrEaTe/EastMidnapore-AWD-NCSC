@@ -1,0 +1,16 @@
+Parameter,T1 (Local Farmer),T2 (Continuous),T3 (Manual AWD),T4 (Sensor AWD),SEm±,CD (P=0.05),CV (%),F-value,P-value,Significance
+Seasonal Irrigation Water (mm),659.90a,609.52b,501.74c,475.38d,0.584,1.80,0.23%,22487.22,9.2791e-23,**
+Irrigation Water Savings (%),0.00d,7.64c,23.97b,27.96a,0.088,0.27,1.33%,22516.69,9.2064e-23,**
+Grain Yield (t/ha),6.59b,6.62a,6.55c,6.60b,0.006,0.02,0.20%,20.71,4.8924e-05,**
+Irrigation Water Productivity (kg/m3),1.00d,1.09c,1.31b,1.39a,0.001,0.00,0.27%,16089.73,6.9124e-22,**
+Leaf Relative Water Content (RWC %),84.43a,84.28a,84.33a,84.44a,0.085,NS,0.23%,0.83,5.0348e-01,NS
+Leaf Chlorophyll Index (SPAD),40.25a,40.13a,40.17a,40.28a,0.077,NS,0.43%,0.90,4.6882e-01,NS
+Total Chlorophyll (mg/g FW),2.71a,2.68a,2.69a,2.70a,0.009,NS,0.73%,1.82,1.9635e-01,NS
+Leaf Free Proline (umol/g FW),1.92a,1.93a,1.92a,1.95a,0.014,NS,1.65%,0.85,4.9432e-01,NS
+Effective Tillers per Hill,13.88b,13.88b,14.56a,14.62a,0.080,0.25,1.26%,26.42,1.4285e-05,**
+Plant Height at Harvest (cm),100.56a,100.42a,100.44a,100.98a,0.255,NS,0.57%,1.05,4.0761e-01,NS
+Panicle Length (cm),23.31a,23.26a,23.17a,23.25a,0.043,NS,0.42%,1.77,2.0652e-01,NS
+Filled Grains per Panicle,133.06a,132.82a,132.64a,132.32a,0.481,NS,0.81%,0.42,7.4141e-01,NS
+1000-Grain Test Weight (g),24.00a,23.97a,24.01a,24.01a,0.026,NS,0.24%,0.74,5.4792e-01,NS
+Straw Yield (t/ha),7.48a,7.48a,7.46a,7.47a,0.020,NS,0.61%,0.37,7.7286e-01,NS
+Harvest Index (HI %),46.82a,46.93a,46.78a,46.89a,0.075,NS,0.36%,0.83,5.0101e-01,NS

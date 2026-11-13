@@ -1,0 +1,2 @@
+plot_id,block,treatment,treatment_name,irrigation_mm,peff_mm,eta_mm,dp_mm,seep_mm,water_savings_pct,water_productivity_kg_m3,min_water_depth_cm,mean_stress_index,rwc_pct,spad,total_chlorophyll_mg_g,proline_umol_g,plant_height_cm,effective_tillers_hill,panicle_length_cm,filled_grains_per_panicle,test_weight_1000_g,grain_yield_tha,grain_yield_kgha,straw_yield_tha,harvest_index_pct
+21,Validation,Plot21,Independent Validation Plot 21,481.8,25.0,514.6,79.5,10.6,26.99,1.367,-22.0,0.0,84.48,40.32,2.702,1.962,100.3,14.5,23.36,131.6,24.06,6.584,6584.0,7.457,46.89
