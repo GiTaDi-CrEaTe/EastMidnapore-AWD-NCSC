@@ -23,6 +23,7 @@ from src.rcbd_experiment import run_full_rcbd_experiment
 from src.statistics_ncsc import build_ncsc_summary_table, calculate_two_way_rcbd_anova
 from src.threshold_calibration import run_threshold_sensitivity_sweep, build_extension_advisory_table
 from scripts.generate_figures import generate_all_figures
+from scripts.build_web_app import build_web_app
 
 
 def run_pipeline():
@@ -42,7 +43,7 @@ def run_pipeline():
     # --------------------------------------------------------------------------
     # Step 1: Run 20-Plot RCBD Simulation + Plot 21 Independent Validation
     # --------------------------------------------------------------------------
-    print("\n[Step 1/5] Running 20-Plot RCBD Agro-Hydrological & Physiological Simulation...")
+    print("\n[Step 1/6] Running 20-Plot RCBD Agro-Hydrological & Physiological Simulation...")
     df_rcbd, df_val, df_daily = run_full_rcbd_experiment(seed=101)
     
     rcbd_path = os.path.join(data_dir, "rcbd_20plots_full_dataset.csv")
@@ -60,7 +61,7 @@ def run_pipeline():
     # --------------------------------------------------------------------------
     # Step 2: Two-Way RCBD ANOVA & ICAR/NCSC Summary Table
     # --------------------------------------------------------------------------
-    print("\n[Step 2/5] Performing Two-Way RCBD ANOVA and Generating ICAR/NCSC Statistical Table...")
+    print("\n[Step 2/6] Performing Two-Way RCBD ANOVA and Generating ICAR/NCSC Statistical Table...")
     df_anova_summary = build_ncsc_summary_table(df_rcbd)
     
     anova_path = os.path.join(data_dir, "ncsc_anova_cd_summary_table.csv")
@@ -72,7 +73,7 @@ def run_pipeline():
     # --------------------------------------------------------------------------
     # Step 3: Pareto Threshold Sensitivity Sweep (0 to -30 cm)
     # --------------------------------------------------------------------------
-    print("\n[Step 3/5] Executing Pareto Threshold Sensitivity Sweep & Farmer Extension Calculations...")
+    print("\n[Step 3/6] Executing Pareto Threshold Sensitivity Sweep & Farmer Extension Calculations...")
     df_sweep = run_threshold_sensitivity_sweep(step_cm=1.0, min_threshold_cm=-30.0)
     sweep_path = os.path.join(data_dir, "threshold_sensitivity_sweep.csv")
     df_sweep.to_csv(sweep_path, index=False)
@@ -86,13 +87,13 @@ def run_pipeline():
     # --------------------------------------------------------------------------
     # Step 4: Render All 6 High-Resolution 300-DPI Figures
     # --------------------------------------------------------------------------
-    print("\n[Step 4/5] Rendering 6 Publication-Grade 300-DPI Figures (PNG + Vector PDF)...")
+    print("\n[Step 4/6] Rendering 6 Publication-Grade 300-DPI Figures (PNG + Vector PDF)...")
     generate_all_figures()
 
     # --------------------------------------------------------------------------
     # Step 5: Generate Exhaustive NCSC Scientific & Field Report
     # --------------------------------------------------------------------------
-    print("\n[Step 5/5] Compiling Comprehensive NCSC Field & Statistical Report...")
+    print("\n[Step 5/6] Compiling Comprehensive NCSC Field & Statistical Report...")
     report_path = os.path.join(reports_dir, "NCSC_Statistical_and_Field_Report.md")
     
     # Extract key stats for dynamic report injection
@@ -211,14 +212,20 @@ All 6 publication-grade 300-DPI scientific figures have been generated and archi
 6. `figures/fig6_farmer_extension_savings_impact.png`: Sub-Division Groundwater, Fuel, and Tillering Stimulus Analysis.
 
 ---
-*Report autonomously prepared and compiled for the National Children's Science Congress (NCSC) Oral Defense & Technical Report.*
+*Technical Investigation Report compiled for the National Children's Science Congress (NCSC) Senior Focal Theme Presentation & Oral Defense.*
 """
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report_md)
     print(f"  -> Exported: {report_path}")
 
+    # --------------------------------------------------------------------------
+    # Step 6: Generate Clean Interactive HTML5 Field Web Application
+    # --------------------------------------------------------------------------
+    print("\n[Step 6/6] Generating Standalone Interactive HTML5 Web Application in docs/index.html...")
+    build_web_app()
+
     print("\n" + "=" * 80)
-    print("ALL 5 PIPELINE STEPS COMPLETED SUCCESSFULLY!")
+    print("ALL 6 PIPELINE STEPS COMPLETED SUCCESSFULLY!")
     print("=" * 80)
 
 

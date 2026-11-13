@@ -115,4 +115,4 @@ All 6 publication-grade 300-DPI scientific figures have been generated and archi
 6. `figures/fig6_farmer_extension_savings_impact.png`: Sub-Division Groundwater, Fuel, and Tillering Stimulus Analysis.
 
 ---
-*Report autonomously prepared and compiled for the National Children's Science Congress (NCSC) Oral Defense & Technical Report.*
+*Technical Investigation Report compiled for the National Children's Science Congress (NCSC) Senior Focal Theme Presentation & Oral Defense.*

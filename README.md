@@ -5,7 +5,7 @@
 [![NCSC Research Edition](https://img.shields.io/badge/NCSC-Championship%20Edition-green.svg)](https://ncsc.co.in)
 [![Tests: 100% Passed](https://img.shields.io/badge/pytest-100%25%20Passed-brightgreen.svg)](tests/)
 
-> **A scientific agro-hydrological, physiological, and biometrical simulation framework paired with a standalone interactive HTML5 Digital Twin & Farmer Extension Advisory Web Application for Boro season lowland rice in Egra Sub-Division, Purba Medinipur, West Bengal, India.**
+> **A scientific agro-hydrological, physiological, and biometrical simulation framework paired with a standalone interactive HTML5 Field Simulator & Farmer Extension Advisory Web Application for Boro season lowland rice in Egra Sub-Division, Purba Medinipur, West Bengal, India.**
 
 ---
 
@@ -133,7 +133,7 @@ All 6 figures are rendered at **$300\text{ DPI}$** in `figures/` (available in b
 
 ---
 
-## 6. Standalone Interactive HTML5 Digital Twin (`docs/index.html`)
+## 6. Standalone Interactive HTML5 Field Web Application (`docs/index.html`)
 
 The interactive web application in `docs/index.html` operates with **zero external dependencies and zero backend**. It is fully self-contained and ready to open locally or host on GitHub Pages:
 
@@ -145,7 +145,7 @@ The interactive web application in `docs/index.html` operates with **zero extern
   * Interactive $4 \times 5$ plot grid; clicking any plot opens a telemetry drawer displaying complete hydrological, physiological, and yield component breakdowns.
 * **Module 3 — Multi-Chart Comparative Analytics:**
   * Interactive SVG visualizations of the 110-day sawtooth dynamics and the Pareto calibration curve.
-* **Module 4 — Bilingual Farmer Extension Advisory Calculator (English / বাংলা):**
+* **Module 4 — Farmer Extension Advisory Calculator:**
   * Input land area in **Bigha**, **Katha**, **Acre**, or **Hectare**.
   * Choose between **Electric Submersible STW** or **Diesel Engine Pump**.
   * Instant readout of groundwater saved (Litres & $\text{m}^3$), electricity ($\text{kWh}$) or diesel ($\text{L}$) saved, net financial savings ($\text{INR}$), and Pani Pipe payback time.
@@ -184,7 +184,7 @@ The interactive web application in `docs/index.html` operates with **zero extern
 ├── scripts/
 │   ├── run_all.py                     # Master orchestrator: runs model, stats, CSVs, figures, report
 │   ├── generate_figures.py            # 6 publication-grade figures (300 DPI PNG + vector PDF)
-│   └── build_web_app.py               # Standalone interactive HTML5 Digital Twin generator
+│   └── build_web_app.py               # Standalone interactive HTML5 web app generator
 ├── data/
 │   ├── rcbd_20plots_full_dataset.csv  # 20-plot complete experimental dataset
 │   ├── daily_water_table_110days.csv  # 110-day daily water depth & moisture trajectories
@@ -202,7 +202,7 @@ The interactive web application in `docs/index.html` operates with **zero extern
 │   ├── fig5_threshold_calibration_pareto_curve.png
 │   └── fig6_farmer_extension_savings_impact.png
 ├── docs/
-│   └── index.html                     # Standalone interactive HTML5 Digital Twin & Web App
+│   └── index.html                     # Standalone interactive HTML5 web application & field tool
 └── tests/
     └── test_egra_awd_simulation.py    # Complete automated verification suite (7 tests)
 ```
@@ -224,7 +224,7 @@ python3 scripts/run_all.py
 ```
 This executes the agro-hydrological model across all 20 RCBD plots, generates all 6 CSV datasets, renders all 6 300-DPI figures in `figures/`, and compiles `reports/NCSC_Statistical_and_Field_Report.md`.
 
-### 9.3 Launch the Interactive Digital Twin
+### 9.3 Launch the Interactive Web Application
 Open `docs/index.html` directly in any web browser:
 ```bash
 xdg-open docs/index.html   # On Linux
