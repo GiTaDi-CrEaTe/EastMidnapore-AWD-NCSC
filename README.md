@@ -169,7 +169,6 @@ The interactive web application in `docs/index.html` operates with **zero extern
 
 ```
 .
-├── AGENTS.md                          # Autonomous build specification
 ├── README.md                          # Comprehensive scientific & technical documentation
 ├── pyproject.toml                     # Python packaging & pytest configuration
 ├── requirements.txt                   # Core scientific dependencies
