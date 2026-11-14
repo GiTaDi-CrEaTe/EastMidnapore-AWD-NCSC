@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exploring Safe Alternate Wetting and Drying in Boro Rice: A Soil–Water Simulation and Farmer Advisory Prototype for Egra, Purba Medinipur</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            't1-col': '#b91c1c',
+            't2-col': '#1d4ed8',
+            't3-col': '#15803d',
+            't4-col': '#7e22ce',
+            'val-col': '#d97706',
+            'pan-col': '#3e2723',
+            'soil-col': '#5d4037'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .table-numeric {
+      font-variant-numeric: tabular-nums;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.9); }
+    }
+    .star-glow {
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- ====================================================================== -->
+  <!-- Top Institutional Header -->
+  <!-- ====================================================================== -->
+  <header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo / Title -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-md bg-stone-900 flex items-center justify-center text-white font-serif font-black text-sm">
+            PM
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-sm sm:text-base font-bold text-stone-900 leading-tight">Exploring Safe Alternate Wetting and Drying in Boro Rice</h1>
+              <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">Biophysical Simulation Prototype</span>
+            </div>
+            <p class="text-xs text-stone-500 font-medium">Coupled Biophysical Model & Decision Support System • Egra, Purba Medinipur, West Bengal (2025–2026)</p>
+          </div>
+        </div>
+
+        <!-- Quick Jump to Judge's Challenge -->
+        <div class="flex items-center space-x-3">
+          <a href="#sec-challenge" class="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-bold bg-amber-500 hover:bg-amber-600 text-white shadow-xs transition">
+            <span class="mr-1.5">🎯</span> Judge's Challenge
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Jump Bar -->
+      <nav class="flex space-x-6 overflow-x-auto custom-scroll text-xs font-semibold text-stone-600 border-t border-stone-100 py-2.5">
+        <a href="#sec-interactive-dashboard" class="hover:text-stone-900 transition whitespace-nowrap flex items-center text-stone-900 font-bold">
+          <span class="mr-1">🔬</span> Interactive Display Dashboard
+        </a>
+        <a href="#sec-fieldmap" class="hover:text-stone-900 transition whitespace-nowrap flex items-center">
+          <span class="mr-1">🗺️</span> 21-Plot Field Map
+        </a>
+        <a href="#sec-challenge" class="hover:text-stone-900 transition whitespace-nowrap flex items-center text-amber-700 font-bold">
+          <span class="mr-1">🎯</span> Judge's Challenge (Pareto)
+        </a>
+        <a href="#sec-phenology" class="hover:text-stone-900 transition whitespace-nowrap flex items-center">
+          <span class="mr-1">🌾</span> Crop Phenology & Guardrail
+        </a>
+        <a href="#sec-extension" class="hover:text-stone-900 transition whitespace-nowrap flex items-center">
+          <span class="mr-1">💡</span> Sensor & Extension Advisory
+        </a>
+        <a href="#sec-anova" class="hover:text-stone-900 transition whitespace-nowrap flex items-center">
+          <span class="mr-1">📋</span> ANOVA & CD Summary Table
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================== -->
+  <!-- Main Unified Dashboard Container -->
+  <!-- ====================================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+
+    <!-- ==================================================================== -->
+    <!-- SCIENTIFIC DATA PROVENANCE & METHODOLOGY SCOPE BANNER -->
+    <!-- ==================================================================== -->
+    <section class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-xs border border-amber-200">
+      <div class="flex items-start space-x-3">
+        <span class="text-2xl mt-0.5">🔬</span>
+        <div class="text-xs text-stone-800 space-y-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-bold uppercase tracking-wider text-[11px] text-amber-900">
+              Scientific Scope & Computational Model Provenance (NCSC 2026)
+            </span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-200 text-amber-900 border border-amber-300">
+              Biophysical Simulation Prototype
+            </span>
+          </div>
+          <p class="leading-relaxed text-stone-700">
+            <strong>Process Simulation Prototype:</strong> All plot datasets, 110-day water table hydrographs, physiological readings (RWC, SPAD, Proline), and yield outputs presented in this dashboard are generated by a coupled root-zone water mass-conservation model (&Delta;W = I + P<sub>eff</sub> &minus; ET<sub>a</sub> &minus; DP &minus; S<sub>bund</sub>) parameterized for Egra coastal-alluvial clay-loam soils. While grounded in established IRRI safe-AWD field guidelines and calibrated against local agricultural parameters, these outputs represent computational simulation results rather than physical multi-plot field sensor measurements.
+          </p>
+          <div class="flex flex-wrap items-center gap-2 pt-1 font-semibold text-[10px] text-stone-600">
+            <a href="https://github.com/GiTaDi-CrEaTe/EastMidnapore-AWD-NCSC/blob/main/reports/SCIENTIFIC_ASSUMPTIONS_AND_MODEL_SCOPE.md" target="_blank" class="text-amber-800 underline hover:text-amber-950 flex items-center">
+              <span>📄 View Scientific Assumptions & Governing Equations</span>
+            </a>
+            <span class="text-stone-300">•</span>
+            <span>Target Irrigation: T1=660mm, T2=594mm, T3=502mm, T4=475mm</span>
+            <span class="text-stone-300">•</span>
+            <span>Grouping: Critical Difference (CD at P=0.05 / Fisher's LSD)</span>
+            <span class="text-stone-300">•</span>
+            <span>Validation Scenario #21: Out-of-sample simulation test</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- EXECUTIVE KPI SUMMARY RIBBON -->
+    <!-- ==================================================================== -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-xs">
+        <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider block">Seasonal Water Saved</span>
+        <div class="text-2xl font-black text-stone-900 mt-0.5">28.0% vs. T1</div>
+        <span class="text-xs text-emerald-700 font-semibold block mt-0.5">1,845 m³/ha groundwater preserved</span>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-xs">
+        <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider block">Water Productivity (WP)</span>
+        <div class="text-2xl font-black text-emerald-700 mt-0.5">1.39 kg/m³</div>
+        <span class="text-xs text-stone-600 block mt-0.5">+39% gain over local practice (1.00)</span>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-xs">
+        <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider block">Grain Yield Parity</span>
+        <div class="text-2xl font-black text-stone-900 mt-0.5">6.60 t/ha</div>
+        <span class="text-xs text-stone-600 block mt-0.5">&lt; 1% agronomic variance (P &gt; 0.05 NS)</span>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-xs">
+        <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider block">Capillary Safety Threshold</span>
+        <div class="text-2xl font-black text-amber-700 mt-0.5">-15.0 cm</div>
+        <span class="text-xs text-stone-600 block mt-0.5">Zero cellular dehydration stress</span>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- MODULE 1 & 2: MASTER INTERACTIVE DUAL DISPLAY -->
+    <!-- Soil Water Physics Cross-Section + Virtual Biochemical Assay Lab -->
+    <!-- ==================================================================== -->
+    <section id="sec-interactive-dashboard" class="bg-white rounded-xl p-6 border border-stone-200 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-stone-100 pb-4">
+        <div>
+          <div class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-stone-100 text-stone-800 uppercase tracking-wider mb-1">
+            Coupled Agro-Hydrological & Laboratory Visualizer
+          </div>
+          <h2 class="text-xl font-bold text-stone-900">Interactive Subsurface Cross-Section & Virtual Biochemical Assay Lab</h2>
+          <p class="text-xs text-stone-500 mt-0.5">Drag the water table slider below to observe synchronized underground capillary flux, deep percolation head, PVC tube water level, and spectrophotometric free proline colorimetry.</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span id="badge-capillary-status" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+            Capillary Continuity Intact
+          </span>
+        </div>
+      </div>
+
+      <!-- Master Synchronized Control Bar -->
+      <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-bold text-stone-800 uppercase tracking-wider">Perched Water Depth (z):</span>
+            <span id="lbl-master-depth" class="text-base font-black font-mono text-stone-900 bg-white px-2.5 py-0.5 rounded border border-stone-300">-15.0 cm</span>
+          </div>
+
+          <!-- Treatment Presets -->
+          <div class="flex items-center space-x-1.5 text-xs">
+            <span class="text-stone-500 text-[11px] font-semibold mr-1">Presets:</span>
+            <button onclick="setMasterDepth(1.5)" class="px-2 py-1 rounded font-semibold border border-red-200 bg-red-50 text-red-800 hover:bg-red-100 transition">T1 Farmer (+1.5)</button>
+            <button onclick="setMasterDepth(3.0)" class="px-2 py-1 rounded font-semibold border border-blue-200 bg-blue-50 text-blue-800 hover:bg-blue-100 transition">T2 Submerge (+3.0)</button>
+            <button onclick="setMasterDepth(-15.0)" class="px-2 py-1 rounded font-bold border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition">T3/T4 AWD (-15.0) ⭐</button>
+            <button onclick="setMasterDepth(-25.0)" class="px-2 py-1 rounded font-semibold border border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 transition">Stress (-25.0)</button>
+          </div>
+        </div>
+
+        <!-- Slider -->
+        <input type="range" id="slider-master-depth" min="-30" max="8" step="0.5" value="-15"
+               oninput="onMasterDepthInput(parseFloat(this.value))"
+               class="w-full h-3 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-stone-900">
+        <div class="flex justify-between text-[10px] text-stone-400 font-medium">
+          <span>+8 cm (Heavy Flood Head)</span>
+          <span class="font-bold text-emerald-700">-15 cm (Optimal AWD Trigger)</span>
+          <span>-30 cm (Severe Dehydration Cliff)</span>
+        </div>
+      </div>
+
+      <!-- Dual Display Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- PANEL A: Animated Paddy Cross-Section (6 Cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-stone-800 uppercase tracking-wider text-[11px]">Panel A: Subsurface Cross-Section (+10 to -30 cm)</span>
+            <span class="text-stone-500 text-[10px]">Canvas Live Physics</span>
+          </div>
+
+          <div class="relative w-full overflow-hidden rounded-xl border border-stone-200 bg-stone-900 shadow-inner">
+            <canvas id="cross-section-canvas" width="600" height="460" class="w-full h-auto block"></canvas>
+          </div>
+
+          <!-- Soil Physics Readouts -->
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="p-2 bg-stone-50 rounded border border-stone-200">
+              <span class="text-stone-500 text-[10px] block font-semibold">Volumetric θv:</span>
+              <strong id="kpi-theta" class="text-stone-900 font-mono text-sm">39.2%</strong>
+              <span class="text-[9px] text-stone-500 block">Saturated θs=48.5%</span>
+            </div>
+            <div class="p-2 bg-stone-50 rounded border border-stone-200">
+              <span class="text-stone-500 text-[10px] block font-semibold">Matric Potential:</span>
+              <strong id="kpi-matric" class="text-stone-900 font-mono text-sm">-16.8 kPa</strong>
+              <span class="text-[9px] text-emerald-700 block">Readily Available</span>
+            </div>
+            <div class="p-2 bg-stone-50 rounded border border-stone-200">
+              <span class="text-stone-500 text-[10px] block font-semibold">Percolation Rate:</span>
+              <strong id="kpi-dp" class="text-stone-900 font-mono text-sm">0.0 mm/d</strong>
+              <span class="text-[9px] text-emerald-700 block">Head Relieved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL B: Virtual Biochemical Assay Lab (6 Cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-stone-800 uppercase tracking-wider text-[11px]">Panel B: Virtual Biochemical Assay Lab</span>
+            <span class="text-stone-500 text-[10px]">Bates (1973) Spectrophotometer</span>
+          </div>
+
+          <div class="bg-stone-900 text-white rounded-xl p-4 shadow-md border border-stone-800 space-y-4">
+            <!-- Spectrophotometer Top Bar -->
+            <div class="flex justify-between items-center border-b border-stone-800 pb-2">
+              <div class="text-[10px] font-mono text-stone-400">UV-VIS SPECTROPHOTOMETER (λ = 520 nm)</div>
+              <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-stone-800 text-emerald-400 border border-stone-700">ONLINE</span>
+            </div>
+
+            <div class="grid grid-cols-12 gap-3 items-center">
+              <!-- Visual Toluene Cuvette (5 Cols) -->
+              <div class="col-span-5 flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
+                <span class="text-[10px] text-stone-400 mb-1.5">Toluene Extract Layer</span>
+                <div class="w-14 h-36 rounded-t-sm border-2 border-slate-400/80 bg-slate-900/60 p-1 flex flex-col justify-end relative shadow-inner">
+                  <div id="cuvette-liquid" class="w-full h-24 rounded-b-xs transition-colors duration-300 flex items-center justify-center text-[9px] font-mono font-bold text-stone-900/80" style="background-color: rgba(254, 205, 211, 0.75);">
+                    520 nm
+                  </div>
+                  <div class="w-full h-1 bg-white/40 mb-0.5"></div>
+                  <div class="absolute inset-y-12 -left-2 -right-2 h-4 bg-emerald-400/20 pointer-events-none flex items-center justify-between">
+                    <span class="text-[7px] text-emerald-300">I₀ ▶</span>
+                    <span class="text-[7px] text-emerald-300">▶ I</span>
+                  </div>
+                </div>
+                <span id="cuvette-label" class="text-[9px] font-semibold text-stone-300 mt-1.5">Pale Baseline Pink</span>
+              </div>
+
+              <!-- LCD Readout (7 Cols) -->
+              <div class="col-span-7 space-y-2">
+                <div class="bg-black p-2.5 rounded border border-stone-700 font-mono">
+                  <div class="text-[9px] text-emerald-500 uppercase">Absorbance (A₅₂₀)</div>
+                  <div id="lcd-abs" class="text-2xl font-black text-emerald-400 table-numeric tracking-wider">0.168</div>
+                  <div class="text-[9px] text-stone-500 mt-0.5">Pathlength: 1.0 cm</div>
+                </div>
+
+                <div class="bg-stone-800 p-2.5 rounded border border-stone-700">
+                  <div class="text-[9px] text-stone-400 uppercase font-semibold">Free Proline</div>
+                  <div class="flex items-baseline space-x-1">
+                    <span id="lcd-proline" class="text-xl font-black text-white table-numeric">1.94</span>
+                    <span class="text-[10px] text-stone-400 font-mono">µmol/g FW</span>
+                  </div>
+                  <div id="lcd-proline-status" class="mt-0.5 text-[10px] font-semibold text-emerald-400">
+                    NS — Baseline (Zero Stress)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Leaf Cellular Turgor & SPAD inside Lab -->
+            <div class="bg-stone-950 p-3 rounded-lg border border-stone-800 flex items-center justify-between gap-3 text-xs">
+              <div class="flex flex-col items-center">
+                <svg id="svg-cells" width="90" height="60" viewBox="0 0 130 90">
+                  <!-- Hexagonal cells populated in JS -->
+                </svg>
+                <span id="lbl-cell-state" class="text-[9px] font-bold text-emerald-400 mt-0.5">Turgid Mesophyll</span>
+              </div>
+
+              <div class="space-y-1.5 flex-1 pl-2">
+                <div>
+                  <div class="flex justify-between text-[10px] mb-0.5">
+                    <span class="text-stone-400">SPAD Chlorophyll:</span>
+                    <span id="val-spad" class="font-mono font-bold text-white">40.2</span>
+                  </div>
+                  <div class="w-full bg-stone-800 h-1.5 rounded-full overflow-hidden">
+                    <div id="bar-spad" class="bg-emerald-500 h-full rounded-full transition-all duration-300" style="width: 80%;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-[10px] mb-0.5">
+                    <span class="text-stone-400">Leaf Relative Water Content:</span>
+                    <span id="val-rwc" class="font-mono font-bold text-white">84.4%</span>
+                  </div>
+                  <div class="w-full bg-stone-800 h-1.5 rounded-full overflow-hidden">
+                    <div id="bar-rwc" class="bg-blue-500 h-full rounded-full transition-all duration-300" style="width: 84.4%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physical Advisory Note -->
+          <div id="box-physics-advisory" class="p-3 bg-stone-50 border border-stone-200 rounded-lg text-xs leading-relaxed text-stone-700">
+            <strong>Coupled Hydrological & Physiological Status:</strong> At -15.0 cm, the capillary fringe directly hydrates the root zone. Leaf cells maintain full turgor (RWC 84.4%), chlorophyll remains green (40.2 SPAD), and free proline stays at non-stressed baseline (1.94 µmol/g FW).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SECTION 2: 21-PLOT EGRA FIELD MAP & LOGBOOK -->
+    <!-- ==================================================================== -->
+    <section id="sec-fieldmap" class="bg-white rounded-xl p-6 border border-stone-200 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-stone-100 pb-4">
+        <div>
+          <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">Randomized Complete Block Design (RCBD)</div>
+          <h2 class="text-xl font-bold text-stone-900">Farmer's Field Spatial Map (20 RCBD Plots + Plot 21 Validation)</h2>
+          <p class="text-xs text-stone-500 mt-0.5">Click any plot to inspect its complete 110-day field logbook card, yield components, and biochemical assays.</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="togglePlot21Spotlight()" id="btn-spotlight" class="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-bold bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 transition">
+            ⭐ Spotlight Validation Scenario #21
+          </button>
+        </div>
+      </div>
+
+      <!-- Heatmap Switcher -->
+      <div class="flex flex-wrap items-center justify-between gap-3 p-3 bg-stone-50 rounded-lg border border-stone-200">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold text-stone-700">Heatmap Layer:</span>
+          <div class="inline-flex rounded-md shadow-xs">
+            <button onclick="setHeatmapMetric('irrigation_mm')" id="btn-heat-irr" class="px-2.5 py-1 text-xs font-semibold rounded-l-md border border-stone-300 bg-white hover:bg-stone-100 text-stone-800">Irrigation (mm)</button>
+            <button onclick="setHeatmapMetric('water_productivity_kg_m3')" id="btn-heat-wp" class="px-2.5 py-1 text-xs font-semibold border-t border-b border-stone-300 bg-stone-900 text-white">Water Productivity (kg/m³)</button>
+            <button onclick="setHeatmapMetric('grain_yield_tha')" id="btn-heat-yield" class="px-2.5 py-1 text-xs font-semibold border-t border-b border-stone-300 bg-white hover:bg-stone-100 text-stone-800">Grain Yield (t/ha)</button>
+            <button onclick="setHeatmapMetric('proline_umol_g')" id="btn-heat-proline" class="px-2.5 py-1 text-xs font-semibold rounded-r-md border border-stone-300 bg-white hover:bg-stone-100 text-stone-800">Proline (µmol/g)</button>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 text-xs">
+          <span id="legend-min-lbl" class="text-stone-500 font-mono">1.00</span>
+          <div class="w-28 h-3 rounded bg-gradient-to-r from-stone-200 via-amber-200 to-emerald-600 border border-stone-300"></div>
+          <span id="legend-max-lbl" class="text-stone-900 font-bold font-mono">1.39</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Plots Grid (7 Cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div id="plots-container" class="space-y-3">
+            <!-- Populated dynamically in JS -->
+          </div>
+
+          <!-- Validation Plot 21 Card -->
+          <div id="plot21-card-container" class="pt-3 border-t border-stone-200">
+            <!-- Populated dynamically in JS -->
+          </div>
+        </div>
+
+        <!-- Selected Plot Telemetry (5 Cols) -->
+        <div class="lg:col-span-5">
+          <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 sticky top-24 space-y-4">
+            <div class="flex justify-between items-start border-b border-stone-200 pb-3">
+              <div>
+                <span class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Field Logbook Card</span>
+                <h3 id="tel-title" class="text-base font-bold text-stone-900">Plot #4 (Block R1)</h3>
+                <p id="tel-badge-trt" class="text-xs text-stone-600 font-medium mt-0.5">T4: Sensor-Guided AWD (-15 cm)</p>
+              </div>
+              <div class="text-right">
+                <span class="text-[10px] text-stone-500">Water Productivity</span>
+                <div id="tel-wp" class="text-xl font-black text-emerald-700 table-numeric">1.39 kg/m³</div>
+              </div>
+            </div>
+
+            <!-- Mini Sawtooth Hydrograph -->
+            <div>
+              <span class="text-[11px] font-bold text-stone-600">110-Day Water Table Sawtooth</span>
+              <div class="w-full h-24 bg-white rounded border border-stone-200 mt-1 p-1">
+                <svg id="tel-mini-sawtooth" width="100%" height="100%" viewBox="0 0 300 80" preserveAspectRatio="none">
+                  <!-- Rendered dynamically -->
+                </svg>
+              </div>
+              <div class="flex justify-between text-[10px] text-stone-400 mt-0.5">
+                <span>Day 1 (Transplant)</span>
+                <span class="text-amber-700 font-semibold">Days 58-72 (Flowering)</span>
+                <span>Day 110 (Harvest)</span>
+              </div>
+            </div>
+
+            <!-- Agronomic Breakdown -->
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Seasonal Irrigation:</span>
+                <strong id="tel-irr" class="text-stone-900 table-numeric text-sm">475.4 mm</strong>
+                <span id="tel-sav" class="text-[10px] text-emerald-700 block font-semibold">28.0% vs T1</span>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Grain Yield:</span>
+                <strong id="tel-yield" class="text-stone-900 table-numeric text-sm">6.60 t/ha</strong>
+                <span class="text-[10px] text-stone-600 block">Agronomic Parity</span>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Effective Tillers:</span>
+                <strong id="tel-tillers" class="text-stone-900 table-numeric">14.6 / hill</strong>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Panicle Length:</span>
+                <strong id="tel-pan" class="text-stone-900 table-numeric">23.3 cm</strong>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">1000-Grain Weight:</span>
+                <strong id="tel-gw" class="text-stone-900 table-numeric">24.0 g</strong>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Harvest Index:</span>
+                <strong id="tel-hi" class="text-stone-900 table-numeric">46.9%</strong>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Leaf RWC:</span>
+                <strong id="tel-rwc" class="text-stone-900 table-numeric">84.4%</strong>
+              </div>
+
+              <div class="bg-white p-2.5 rounded border border-stone-200">
+                <span class="text-stone-500 block text-[10px]">Free Proline:</span>
+                <strong id="tel-proline" class="text-stone-900 table-numeric">1.94 µmol/g</strong>
+              </div>
+            </div>
+
+            <div id="box-plot21-spotlight-summary" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs space-y-1.5 text-amber-900">
+              <div class="font-bold text-amber-950 flex items-center">
+                <span class="mr-1">⭐</span> Validation Scenario #21 Synthesis (Simulated Test Plot)
+              </div>
+              <p class="leading-relaxed">
+                Tested under the calibrated <strong>-15.0 cm</strong> threshold: achieved <strong>481.8 mm</strong> irrigation (<strong>27.0% savings</strong>), <strong>1.364 kg/m³</strong> water productivity, and <strong>6.57 t/ha</strong> yield—validating model reproducibility out-of-sample.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SECTION 3: JUDGE'S CHALLENGE (PARETO SENSITIVITY CURVE) -->
+    <!-- ==================================================================== -->
+    <section id="sec-challenge" class="bg-white rounded-xl p-6 border-2 border-amber-300 shadow-md space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-stone-100 pb-4">
+        <div>
+          <div class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 mb-1">
+            Interactive Examination Tool
+          </div>
+          <h2 class="text-xl font-black text-stone-900">Judge's Challenge: Test Your Own Irrigation Threshold</h2>
+          <p class="text-xs text-stone-500 mt-0.5">Select any AWD reflood depth from 0 cm down to -30 cm to run the complete Boro season simulation. Observe if your choice hits the biophysical Pareto sweet spot.</p>
+        </div>
+        <button onclick="runJudgeSimulation()" class="px-4 py-2 rounded-md font-bold text-xs bg-amber-500 hover:bg-amber-600 text-white shadow-xs transition">
+          ▶ Run Boro Season Simulation
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- Controls (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1.5">
+              <span class="font-bold text-stone-700">Your Chosen Reflood Depth:</span>
+              <span id="judge-chosen-lbl" class="text-base font-black font-mono text-stone-900">-15.0 cm</span>
+            </div>
+            <input type="range" id="judge-slider-depth" min="-30" max="0" step="1" value="-15"
+                   oninput="onJudgeSliderInput(parseInt(this.value))"
+                   class="w-full h-2.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-amber-600">
+            <div class="flex justify-between text-[10px] text-stone-400 mt-1">
+              <span>0 cm (Continuous)</span>
+              <span class="font-bold text-stone-800">-15 cm</span>
+              <span>-30 cm (Extreme)</span>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-xs font-semibold text-stone-600 block mb-1.5">Quick Presets:</span>
+            <div class="grid grid-cols-5 gap-1.5 text-xs">
+              <button onclick="onJudgeSliderInput(0)" class="py-1 px-1 rounded font-semibold border border-stone-200 bg-stone-50 hover:bg-stone-100">0 cm</button>
+              <button onclick="onJudgeSliderInput(-5)" class="py-1 px-1 rounded font-semibold border border-stone-200 bg-stone-50 hover:bg-stone-100">-5 cm</button>
+              <button onclick="onJudgeSliderInput(-15)" class="py-1 px-1 rounded font-bold border border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100">-15 cm ⭐</button>
+              <button onclick="onJudgeSliderInput(-20)" class="py-1 px-1 rounded font-semibold border border-stone-200 bg-stone-50 hover:bg-stone-100">-20 cm</button>
+              <button onclick="onJudgeSliderInput(-25)" class="py-1 px-1 rounded font-semibold border border-stone-200 bg-stone-50 hover:bg-stone-100">-25 cm</button>
+            </div>
+          </div>
+
+          <div id="judge-verdict-card" class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs space-y-1 text-emerald-950">
+            <div class="font-bold text-sm">BIOPHYSICAL OPTIMUM IDENTIFIED</div>
+            <p class="leading-relaxed text-[11px]">
+              At <strong>-15.0 cm</strong>, Water Productivity peaks at <strong>1.39 kg/m³</strong> (+39% vs. local farmer practice) while saving <strong>28.0% water</strong> with zero grain yield loss and baseline proline (1.94 µmol/g FW).
+            </p>
+          </div>
+        </div>
+
+        <!-- Scorecards (7 Cols) -->
+        <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+            <span class="text-stone-500 text-[10px] block">Water Saved vs. T1:</span>
+            <strong id="judge-score-sav" class="text-xl font-black text-stone-900 table-numeric">28.0%</strong>
+            <span id="judge-score-irr" class="text-[10px] text-stone-500 block">475.4 mm seasonal</span>
+          </div>
+
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+            <span class="text-stone-500 text-[10px] block">Grain Yield:</span>
+            <strong id="judge-score-yield" class="text-xl font-black text-stone-900 table-numeric">6.60 t/ha</strong>
+            <span id="judge-score-loss" class="text-[10px] text-emerald-700 block font-semibold">0.0% loss (Parity)</span>
+          </div>
+
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+            <span class="text-stone-500 text-[10px] block">Water Productivity:</span>
+            <strong id="judge-score-wp" class="text-xl font-black text-emerald-700 table-numeric">1.39 kg/m³</strong>
+            <span class="text-[10px] text-stone-500 block">Peak biophysical return</span>
+          </div>
+
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+            <span class="text-stone-500 text-[10px] block">Leaf RWC:</span>
+            <strong id="judge-score-rwc" class="text-xl font-black text-stone-900 table-numeric">84.4%</strong>
+            <span class="text-[10px] text-emerald-700 block">Full cell hydration</span>
+          </div>
+
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+            <span class="text-stone-500 text-[10px] block">Free Proline:</span>
+            <strong id="judge-score-pro" class="text-xl font-black text-stone-900 table-numeric">1.94</strong>
+            <span class="text-[10px] text-stone-500 block">µmol/g FW (Baseline)</span>
+          </div>
+
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+            <span class="text-stone-500 text-[10px] block">Hydraulic Safety:</span>
+            <strong id="judge-score-fringe" class="text-sm font-bold text-emerald-700 block mt-1">Capillary Connected</strong>
+            <span class="text-[10px] text-stone-500 block">Root zone hydrated</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Pareto Sensitivity Curve -->
+      <div class="mt-4 pt-4 border-t border-stone-100 space-y-2">
+        <h3 class="text-xs font-bold text-stone-800 uppercase tracking-wider">Pareto Calibration Curve (Water Productivity vs. Free Proline)</h3>
+        <div class="w-full h-72 bg-white rounded-lg border border-stone-200 p-2">
+          <svg id="svg-pareto" width="100%" height="100%" viewBox="0 0 520 280">
+            <!-- Rendered in JS -->
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SECTION 4: 110-DAY CROP PHENOLOGY & FLOWERING GUARDRAIL -->
+    <!-- ==================================================================== -->
+    <section id="sec-phenology" class="bg-white rounded-xl p-6 border border-stone-200 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-stone-100 pb-4">
+        <div>
+          <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">Stage-Aware Hydrological Rules</div>
+          <h2 class="text-xl font-bold text-stone-900">110-Day Crop Phenology & "Flowering Guardrail" Scrubber</h2>
+          <p class="text-xs text-stone-500 mt-0.5">Scrub through the Boro rice growth cycle. Notice how drying is automatically suspended during Flowering (Days 58–72) to protect spikelet fertility.</p>
+        </div>
+        <div id="badge-guardrail" class="px-3 py-1 rounded-full text-xs font-bold bg-stone-100 text-stone-600 border border-stone-300">
+          Guardrail: Standby
+        </div>
+      </div>
+
+      <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 space-y-4">
+        <div class="flex justify-between items-center text-xs">
+          <div>
+            <span class="text-stone-500 uppercase font-semibold text-[10px]">Timeline Position:</span>
+            <strong id="lbl-scrub-day" class="text-base text-stone-900 ml-1">Day 65 after Transplanting</strong>
+          </div>
+          <div>
+            <span class="text-stone-500 uppercase font-semibold text-[10px]">Crop Stage:</span>
+            <strong id="lbl-scrub-stage" class="text-xs text-amber-800 ml-1">Flowering / Anthesis (Kc = 1.25)</strong>
+          </div>
+        </div>
+
+        <!-- Slider -->
+        <input type="range" id="slider-phenology" min="1" max="110" step="1" value="65"
+               oninput="onPhenologyScrub(parseInt(this.value))"
+               class="w-full h-3 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-stone-900">
+
+        <!-- 5 Stages -->
+        <div class="grid grid-cols-5 gap-1 text-center text-[10px] font-semibold pt-1">
+          <div class="p-1.5 rounded bg-blue-50 border border-blue-200 text-blue-800">
+            1. Transplanting<br><span class="text-[9px] font-normal">Days 0-15 (Kc 1.05)</span>
+          </div>
+          <div class="p-1.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800">
+            2. Tillering<br><span class="text-[9px] font-normal">Days 16-42 (Kc 1.15)</span>
+          </div>
+          <div class="p-1.5 rounded bg-teal-50 border border-teal-200 text-teal-800">
+            3. Panicle Init.<br><span class="text-[9px] font-normal">Days 43-57 (Kc 1.20)</span>
+          </div>
+          <div class="p-1.5 rounded bg-amber-100 border border-amber-300 text-amber-900 ring-2 ring-amber-400">
+            4. FLOWERING<br><span class="text-[9px] font-bold text-amber-800">Days 58-72 (Kc 1.25)</span>
+          </div>
+          <div class="p-1.5 rounded bg-stone-100 border border-stone-200 text-stone-800">
+            5. Ripening<br><span class="text-[9px] font-normal">Days 73-110 (Kc 0.90)</span>
+          </div>
+        </div>
+
+        <!-- Guardrail Alert Banner -->
+        <div id="banner-flowering-alert" class="p-4 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900 space-y-1">
+          <div class="font-bold flex items-center text-sm text-amber-950">
+            <span class="mr-2">🛡️</span> CRITICAL REPRODUCTIVE WINDOW (Flowering Guardrail Active)
+          </div>
+          <p class="leading-relaxed">
+            At <strong>Day 58 to 72</strong> (Heading and Anthesis), the AWD protocol strictly suspends drying and enforces <strong>shallow standing submergence (+2.5 to +3.0 cm)</strong>. Desiccating the perched water table during pollen meiosis triggers severe spikelet sterility (> 35% empty grains). Once anthesis completes on Day 73, safe AWD reflood triggers (-15 cm) immediately resume.
+          </p>
+        </div>
+
+        <!-- Field Water Level Comparison on Selected Day -->
+        <div class="bg-white p-4 rounded-xl border border-stone-200">
+          <h4 class="text-xs font-bold text-stone-700 uppercase tracking-wider mb-3">Field Perched Water Level Comparison on Selected Day</h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            <div class="p-2.5 rounded bg-red-50/50 border border-red-200">
+              <span class="text-red-700 font-bold block">T1 Farmer</span>
+              <span id="pheno-t1-z" class="text-lg font-black text-stone-900 table-numeric">+3.2 cm</span>
+              <span class="text-[10px] text-stone-500 block">Unstructured flooding</span>
+            </div>
+            <div class="p-2.5 rounded bg-blue-50/50 border border-blue-200">
+              <span class="text-blue-700 font-bold block">T2 Continuous</span>
+              <span id="pheno-t2-z" class="text-lg font-black text-stone-900 table-numeric">+2.8 cm</span>
+              <span class="text-[10px] text-stone-500 block">Continuous ponding</span>
+            </div>
+            <div class="p-2.5 rounded bg-emerald-50/50 border border-emerald-200">
+              <span class="text-emerald-700 font-bold block">T3 Manual AWD</span>
+              <span id="pheno-t3-z" class="text-lg font-black text-stone-900 table-numeric">+2.5 cm</span>
+              <span id="pheno-t3-note" class="text-[10px] text-emerald-800 block">Guardrail Ponding</span>
+            </div>
+            <div class="p-2.5 rounded bg-purple-50/50 border border-purple-200">
+              <span class="text-purple-700 font-bold block">T4 Sensor AWD</span>
+              <span id="pheno-t4-z" class="text-lg font-black text-stone-900 table-numeric">+2.5 cm</span>
+              <span id="pheno-t4-note" class="text-[10px] text-purple-800 block">Guardrail Ponding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SECTION 5: SENSOR CALIBRATION & FARMER EXTENSION ADVISORY -->
+    <!-- ==================================================================== -->
+    <section id="sec-extension" class="bg-white rounded-xl p-6 border border-stone-200 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-stone-100 pb-4">
+        <div>
+          <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">Translational Agronomy & Extension</div>
+          <h2 class="text-xl font-bold text-stone-900">Capacitive Sensor Calibration & Farm-Scale Extension Tool</h2>
+          <p class="text-xs text-stone-500 mt-0.5">Explore the electronic sensor calibration curve and calculate farm-level economic and greenhouse gas dividends in local land units.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Sensor Calibration Curve & Drying Simulation (6 Cols) -->
+        <div class="lg:col-span-6 bg-stone-50 p-5 rounded-xl border border-stone-200 space-y-4">
+          <div class="flex justify-between items-center border-b border-stone-200 pb-2">
+            <h3 class="text-xs font-bold text-stone-800 uppercase tracking-wider">T4 Capacitive Soil Moisture Sensor Calibration</h3>
+            <button onclick="simulateDryingCycle()" id="btn-sim-drying" class="px-2.5 py-1 text-xs font-semibold rounded bg-stone-900 hover:bg-stone-800 text-white transition">
+              ▶ Simulate 5-Day Drying Cycle
+            </button>
+          </div>
+
+          <!-- SVG Calibration Curve -->
+          <div class="w-full h-56 bg-white rounded-lg border border-stone-200 p-2">
+            <svg id="svg-calibration" width="100%" height="100%" viewBox="0 0 320 200">
+              <!-- Rendered in JS -->
+            </svg>
+          </div>
+
+          <!-- Live Readout -->
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="bg-white p-2 rounded border border-stone-200">
+              <span class="text-stone-500 text-[10px] block">Sensor Output:</span>
+              <strong id="cal-v" class="text-stone-900 font-mono text-sm">1.82 V</strong>
+            </div>
+            <div class="bg-white p-2 rounded border border-stone-200">
+              <span class="text-stone-500 text-[10px] block">Calibrated θv:</span>
+              <strong id="cal-theta" class="text-stone-900 font-mono text-sm">39.2%</strong>
+            </div>
+            <div class="bg-white p-2 rounded border border-stone-200">
+              <span class="text-stone-500 text-[10px] block">Perched Depth:</span>
+              <strong id="cal-z" class="text-stone-900 font-mono text-sm">-15.0 cm</strong>
+            </div>
+          </div>
+          <p class="text-[11px] text-stone-500 leading-relaxed">
+            Capacitance probe detects frequency shift in soil dielectric permittivity (ε = 80 for water vs. 4 for mineral soil). Factory calibrated for Egra puddled clay-loam.
+          </p>
+        </div>
+
+        <!-- Farm Calculator & Mobile SMS Preview (6 Cols) -->
+        <div class="lg:col-span-6 space-y-4">
+          <!-- Calculator Card -->
+          <div class="bg-white p-5 rounded-xl border border-stone-200 space-y-4">
+            <h3 class="text-xs font-bold text-stone-800 uppercase tracking-wider">Farmer Savings & Environmental Impact Calculator</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label class="block text-stone-600 font-medium mb-1">Land Area</label>
+                <input type="number" id="input-area" value="1.0" min="0.1" step="0.1"
+                       oninput="calculateSavings()"
+                       class="w-full p-2 border border-stone-300 rounded focus:ring-1 focus:ring-stone-900 font-mono text-stone-900">
+              </div>
+              <div>
+                <label class="block text-stone-600 font-medium mb-1">Land Unit</label>
+                <select id="select-unit" onchange="calculateSavings()" class="w-full p-2 border border-stone-300 rounded focus:ring-1 focus:ring-stone-900 text-stone-900">
+                  <option value="bigha">Bigha (1 Ha = 7.475 Bigha)</option>
+                  <option value="katha">Katha (1 Bigha = 20 Katha)</option>
+                  <option value="acre">Acre</option>
+                  <option value="hectare" selected>Hectare</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Pump Type -->
+            <div class="text-xs">
+              <label class="block text-stone-600 font-medium mb-1">Pumping Energy Source</label>
+              <div class="flex space-x-4">
+                <label class="flex items-center space-x-1.5 cursor-pointer">
+                  <input type="radio" name="pumpType" value="electric" checked onchange="calculateSavings()" class="accent-stone-900">
+                  <span>Electric Submersible STW (WBSEDCL Rs. 3.50/kWh)</span>
+                </label>
+                <label class="flex items-center space-x-1.5 cursor-pointer">
+                  <input type="radio" name="pumpType" value="diesel" onchange="calculateSavings()" class="accent-stone-900">
+                  <span>Diesel Pump (Rs. 92.50/L)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Output Cards -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
+              <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                <span class="text-[10px] font-bold text-stone-500 uppercase">Groundwater Preserved</span>
+                <div id="out-water-litres" class="text-xl font-black text-stone-900 table-numeric">1,845,000</div>
+                <span id="out-water-m3" class="text-[11px] text-stone-600">(1,845.0 m³ preserved)</span>
+              </div>
+
+              <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                <span class="text-[10px] font-bold text-stone-500 uppercase">Pumping Cost Saved</span>
+                <div id="out-cost-inr" class="text-xl font-black text-emerald-700 table-numeric">₹2,260</div>
+                <span id="out-energy-saved" class="text-[11px] text-stone-600">645.8 kWh electricity saved</span>
+              </div>
+            </div>
+
+            <!-- Methane & Sub-Division Impact -->
+            <div class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-lg text-xs space-y-1 text-emerald-950">
+              <div class="font-bold">🌍 Methane (CH₄) & Regional Scale Dividends:</div>
+              <div id="out-methane" class="text-[11px] leading-relaxed">
+                Periodic soil aeration cuts methanogenesis by <strong>45%</strong> (IPCC guidelines): saving <strong>135.0 kg CH₄/ha</strong> (~3.78 tonnes CO₂e carbon reduction on your land).
+              </div>
+              <div class="text-[11px] text-emerald-800 pt-1 border-t border-emerald-200/60">
+                If adopted across Egra Sub-Division's 10,000 ha Boro rice: <strong>18.5 Billion Litres</strong> of groundwater preserved annually.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile SMS Alert Card (English) -->
+          <div class="bg-stone-900 rounded-2xl p-4 text-white shadow-md max-w-sm mx-auto border border-stone-800">
+            <div class="flex justify-between items-center text-[10px] text-stone-400 border-b border-stone-800 pb-2 mb-3">
+              <span class="font-mono">EGRA AGRI-TELEMETRY</span>
+              <span>4G LTE | 94% 🔋</span>
+            </div>
+            <div class="bg-stone-800 p-3 rounded-lg border border-stone-700 text-xs space-y-1.5 font-mono">
+              <div class="text-amber-400 font-bold flex items-center">
+                <span class="mr-1.5">⚠️</span> FIELD ADVISORY (Plot T4)
+              </div>
+              <p class="text-stone-300 text-[11px] leading-relaxed">
+                Perched water table has dropped to <strong>-15.0 cm</strong> (Capillary safety limit reached).
+              </p>
+              <p class="text-emerald-400 text-[11px] font-bold">
+                ACTION: Apply 4.2 cm irrigation reflood within 24 hours.
+              </p>
+              <div class="text-[10px] text-stone-400 pt-1 border-t border-stone-700">
+                Stage: Tillering (Day 34) | Flowering Guardrail: OK
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SECTION 6: OFFICIAL ICAR / NCSC TWO-WAY ANOVA & CD TABLE -->
+    <!-- ==================================================================== -->
+    <section id="sec-anova" class="bg-white rounded-xl p-6 border border-stone-200 shadow-sm space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-stone-100 pb-3">
+        <div>
+          <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">Biometrical Logbook Engine</div>
+          <h2 class="text-xl font-bold text-stone-900">Official ICAR / NCSC Two-Way RCBD ANOVA & Critical Difference Table</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded text-xs font-mono font-medium bg-stone-100 text-stone-700 border border-stone-300">
+          N = 20 Plots (df: Trt=3, Blk=4, Err=12)
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scroll">
+        <table class="w-full text-xs text-left border-collapse">
+          <thead>
+            <tr class="border-b border-stone-200 bg-stone-50 text-stone-600 font-bold uppercase text-[10px] tracking-wider">
+              <th class="py-2.5 px-3">Agro-Hydrological / Physiological Marker</th>
+              <th class="py-2.5 px-3 text-right">T1 Farmer</th>
+              <th class="py-2.5 px-3 text-right">T2 Continuous</th>
+              <th class="py-2.5 px-3 text-right">T3 Manual AWD</th>
+              <th class="py-2.5 px-3 text-right">T4 Sensor AWD</th>
+              <th class="py-2.5 px-3 text-right">SEm±</th>
+              <th class="py-2.5 px-3 text-right">CD (0.05)</th>
+              <th class="py-2.5 px-3 text-right">F-Ratio</th>
+              <th class="py-2.5 px-3 text-left">Significance</th>
+            </tr>
+          </thead>
+          <tbody id="anova-table-body" class="divide-y divide-stone-100 text-stone-800">
+            <!-- Populated dynamically in JS -->
+          </tbody>
+        </table>
+      </div>
+      <p class="text-[11px] text-stone-500 italic mt-2">
+        Means sharing identical superscript letters are not significantly different at P = 0.05 by Critical Difference (CD at 5% / Fisher's LSD grouping, standard ICAR agronomic biometrics). SEm±: Standard Error of Mean; CD: Critical Difference at 5% level; NS: Non-Significant (P &gt; 0.05); **: Highly Significant (P &lt; 0.001).
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- Footer -->
+  <!-- ====================================================================== -->
+  <footer class="bg-white border-t border-stone-200 mt-auto py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-2">
+      <div>
+        <strong>Integrated Soil-Water-Plant Dynamics in Boro Rice</strong> | Egra Sub-Division, Purba Medinipur, West Bengal
+      </div>
+      <div>
+        NCSC Technical Report & Oral Defense Edition | 100% Client-Side Interactive Architecture
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================== -->
+  <!-- Embedded Scientific Data & Application Logic -->
+  <!-- ====================================================================== -->
+  <script>
+    // Injected Datasets
+    const ALL_PLOTS = [{"plot_id": 1, "block": "R1", "treatment": "T2", "treatment_name": "Standard Continuous Irrigation", "irrigation_mm": 607.6, "peff_mm": 25.0, "eta_mm": 527.9, "dp_mm": 152.6, "seep_mm": 21.0, "water_productivity_kg_m3": 1.077, "min_water_depth_cm": -19.0, "mean_stress_index": 0.0, "rwc_pct": 84.19, "spad": 40.04, "total_chlorophyll_mg_g": 2.685, "proline_umol_g": 1.903, "plant_height_cm": 100.4, "effective_tillers_hill": 14.2, "panicle_length_cm": 23.22, "filled_grains_per_panicle": 133.2, "test_weight_1000_g": 23.96, "grain_yield_tha": 6.546, "grain_yield_kgha": 6546.0, "straw_yield_tha": 7.44, "harvest_index_pct": 46.8, "water_savings_pct": 7.93}, {"plot_id": 2, "block": "R1", "treatment": "T4", "treatment_name": "Sensor-Guided Adaptive AWD", "irrigation_mm": 471.3, "peff_mm": 25.0, "eta_mm": 512.2, "dp_mm": 75.5, "seep_mm": 10.6, "water_productivity_kg_m3": 1.386, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0322, "rwc_pct": 84.21, "spad": 40.08, "total_chlorophyll_mg_g": 2.689, "proline_umol_g": 1.893, "plant_height_cm": 101.2, "effective_tillers_hill": 14.6, "panicle_length_cm": 23.29, "filled_grains_per_panicle": 132.0, "test_weight_1000_g": 24.15, "grain_yield_tha": 6.534, "grain_yield_kgha": 6534.0, "straw_yield_tha": 7.384, "harvest_index_pct": 46.95, "water_savings_pct": 28.58}, {"plot_id": 3, "block": "R1", "treatment": "T1", "treatment_name": "Local Conventional Practice", "irrigation_mm": 659.2, "peff_mm": 25.0, "eta_mm": 528.1, "dp_mm": 192.4, "seep_mm": 21.4, "water_productivity_kg_m3": 0.989, "min_water_depth_cm": -11.6, "mean_stress_index": 0.0, "rwc_pct": 84.24, "spad": 40.38, "total_chlorophyll_mg_g": 2.696, "proline_umol_g": 1.909, "plant_height_cm": 101.5, "effective_tillers_hill": 14.0, "panicle_length_cm": 23.13, "filled_grains_per_panicle": 133.2, "test_weight_1000_g": 24.0, "grain_yield_tha": 6.521, "grain_yield_kgha": 6521.0, "straw_yield_tha": 7.424, "harvest_index_pct": 46.76, "water_savings_pct": 0.11}, {"plot_id": 4, "block": "R1", "treatment": "T3", "treatment_name": "Manual AWD (Pani Pipe)", "irrigation_mm": 501.0, "peff_mm": 25.0, "eta_mm": 517.3, "dp_mm": 87.0, "seep_mm": 12.0, "water_productivity_kg_m3": 1.296, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0329, "rwc_pct": 84.04, "spad": 40.46, "total_chlorophyll_mg_g": 2.71, "proline_umol_g": 1.907, "plant_height_cm": 99.9, "effective_tillers_hill": 14.4, "panicle_length_cm": 23.19, "filled_grains_per_panicle": 133.5, "test_weight_1000_g": 23.98, "grain_yield_tha": 6.493, "grain_yield_kgha": 6493.0, "straw_yield_tha": 7.431, "harvest_index_pct": 46.63, "water_savings_pct": 24.08}, {"plot_id": 5, "block": "R2", "treatment": "T3", "treatment_name": "Manual AWD (Pani Pipe)", "irrigation_mm": 500.5, "peff_mm": 25.0, "eta_mm": 517.1, "dp_mm": 87.4, "seep_mm": 11.8, "water_productivity_kg_m3": 1.3, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0329, "rwc_pct": 83.96, "spad": 40.01, "total_chlorophyll_mg_g": 2.663, "proline_umol_g": 1.962, "plant_height_cm": 99.3, "effective_tillers_hill": 14.7, "panicle_length_cm": 23.2, "filled_grains_per_panicle": 132.1, "test_weight_1000_g": 24.04, "grain_yield_tha": 6.505, "grain_yield_kgha": 6505.0, "straw_yield_tha": 7.45, "harvest_index_pct": 46.61, "water_savings_pct": 24.16}, {"plot_id": 6, "block": "R2", "treatment": "T1", "treatment_name": "Local Conventional Practice", "irrigation_mm": 659.7, "peff_mm": 25.0, "eta_mm": 528.1, "dp_mm": 195.3, "seep_mm": 21.4, "water_productivity_kg_m3": 0.994, "min_water_depth_cm": -12.8, "mean_stress_index": 0.0, "rwc_pct": 84.67, "spad": 40.39, "total_chlorophyll_mg_g": 2.726, "proline_umol_g": 1.923, "plant_height_cm": 99.6, "effective_tillers_hill": 13.7, "panicle_length_cm": 23.21, "filled_grains_per_panicle": 134.1, "test_weight_1000_g": 24.07, "grain_yield_tha": 6.56, "grain_yield_kgha": 6560.0, "straw_yield_tha": 7.482, "harvest_index_pct": 46.72, "water_savings_pct": 0.03}, {"plot_id": 7, "block": "R2", "treatment": "T4", "treatment_name": "Sensor-Guided Adaptive AWD", "irrigation_mm": 476.5, "peff_mm": 25.0, "eta_mm": 513.7, "dp_mm": 77.8, "seep_mm": 10.6, "water_productivity_kg_m3": 1.375, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0268, "rwc_pct": 84.44, "spad": 40.2, "total_chlorophyll_mg_g": 2.701, "proline_umol_g": 1.936, "plant_height_cm": 101.2, "effective_tillers_hill": 14.6, "panicle_length_cm": 23.17, "filled_grains_per_panicle": 131.8, "test_weight_1000_g": 24.01, "grain_yield_tha": 6.552, "grain_yield_kgha": 6552.0, "straw_yield_tha": 7.399, "harvest_index_pct": 46.96, "water_savings_pct": 27.79}, {"plot_id": 8, "block": "R2", "treatment": "T2", "treatment_name": "Standard Continuous Irrigation", "irrigation_mm": 610.5, "peff_mm": 25.0, "eta_mm": 528.0, "dp_mm": 155.5, "seep_mm": 20.8, "water_productivity_kg_m3": 1.083, "min_water_depth_cm": -18.4, "mean_stress_index": 0.0, "rwc_pct": 84.21, "spad": 39.98, "total_chlorophyll_mg_g": 2.659, "proline_umol_g": 1.878, "plant_height_cm": 100.2, "effective_tillers_hill": 14.0, "panicle_length_cm": 23.16, "filled_grains_per_panicle": 134.6, "test_weight_1000_g": 23.98, "grain_yield_tha": 6.609, "grain_yield_kgha": 6609.0, "straw_yield_tha": 7.433, "harvest_index_pct": 47.07, "water_savings_pct": 7.49}, {"plot_id": 9, "block": "R3", "treatment": "T1", "treatment_name": "Local Conventional Practice", "irrigation_mm": 660.8, "peff_mm": 25.0, "eta_mm": 528.1, "dp_mm": 197.4, "seep_mm": 21.2, "water_productivity_kg_m3": 0.997, "min_water_depth_cm": -13.0, "mean_stress_index": 0.0, "rwc_pct": 84.54, "spad": 40.13, "total_chlorophyll_mg_g": 2.705, "proline_umol_g": 1.927, "plant_height_cm": 100.9, "effective_tillers_hill": 13.7, "panicle_length_cm": 23.24, "filled_grains_per_panicle": 132.6, "test_weight_1000_g": 24.02, "grain_yield_tha": 6.589, "grain_yield_kgha": 6589.0, "straw_yield_tha": 7.429, "harvest_index_pct": 47.0, "water_savings_pct": -0.14}, {"plot_id": 10, "block": "R3", "treatment": "T3", "treatment_name": "Manual AWD (Pani Pipe)", "irrigation_mm": 502.4, "peff_mm": 25.0, "eta_mm": 517.3, "dp_mm": 89.2, "seep_mm": 11.8, "water_productivity_kg_m3": 1.309, "min_water_depth_cm": -22.0, "mean_stress_index": 0.034, "rwc_pct": 84.75, "spad": 40.1, "total_chlorophyll_mg_g": 2.656, "proline_umol_g": 1.92, "plant_height_cm": 101.4, "effective_tillers_hill": 14.6, "panicle_length_cm": 23.17, "filled_grains_per_panicle": 132.7, "test_weight_1000_g": 24.04, "grain_yield_tha": 6.575, "grain_yield_kgha": 6575.0, "straw_yield_tha": 7.484, "harvest_index_pct": 46.77, "water_savings_pct": 23.87}, {"plot_id": 11, "block": "R3", "treatment": "T2", "treatment_name": "Standard Continuous Irrigation", "irrigation_mm": 609.0, "peff_mm": 25.0, "eta_mm": 527.3, "dp_mm": 159.7, "seep_mm": 20.8, "water_productivity_kg_m3": 1.087, "min_water_depth_cm": -21.1, "mean_stress_index": 0.0, "rwc_pct": 84.18, "spad": 40.2, "total_chlorophyll_mg_g": 2.677, "proline_umol_g": 1.949, "plant_height_cm": 100.8, "effective_tillers_hill": 13.6, "panicle_length_cm": 23.31, "filled_grains_per_panicle": 133.8, "test_weight_1000_g": 23.88, "grain_yield_tha": 6.618, "grain_yield_kgha": 6618.0, "straw_yield_tha": 7.496, "harvest_index_pct": 46.89, "water_savings_pct": 7.71}, {"plot_id": 12, "block": "R3", "treatment": "T4", "treatment_name": "Sensor-Guided Adaptive AWD", "irrigation_mm": 476.4, "peff_mm": 25.0, "eta_mm": 513.4, "dp_mm": 79.0, "seep_mm": 10.6, "water_productivity_kg_m3": 1.387, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0286, "rwc_pct": 84.53, "spad": 40.16, "total_chlorophyll_mg_g": 2.68, "proline_umol_g": 1.929, "plant_height_cm": 101.0, "effective_tillers_hill": 14.6, "panicle_length_cm": 23.23, "filled_grains_per_panicle": 133.6, "test_weight_1000_g": 23.93, "grain_yield_tha": 6.606, "grain_yield_kgha": 6606.0, "straw_yield_tha": 7.485, "harvest_index_pct": 46.88, "water_savings_pct": 27.81}, {"plot_id": 13, "block": "R4", "treatment": "T4", "treatment_name": "Sensor-Guided Adaptive AWD", "irrigation_mm": 474.0, "peff_mm": 25.0, "eta_mm": 512.9, "dp_mm": 78.8, "seep_mm": 10.4, "water_productivity_kg_m3": 1.395, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0302, "rwc_pct": 84.41, "spad": 40.69, "total_chlorophyll_mg_g": 2.728, "proline_umol_g": 1.965, "plant_height_cm": 100.2, "effective_tillers_hill": 14.5, "panicle_length_cm": 23.21, "filled_grains_per_panicle": 132.7, "test_weight_1000_g": 23.98, "grain_yield_tha": 6.612, "grain_yield_kgha": 6612.0, "straw_yield_tha": 7.555, "harvest_index_pct": 46.67, "water_savings_pct": 28.17}, {"plot_id": 14, "block": "R4", "treatment": "T2", "treatment_name": "Standard Continuous Irrigation", "irrigation_mm": 610.4, "peff_mm": 25.0, "eta_mm": 527.5, "dp_mm": 160.8, "seep_mm": 20.4, "water_productivity_kg_m3": 1.089, "min_water_depth_cm": -20.3, "mean_stress_index": 0.0, "rwc_pct": 84.21, "spad": 40.44, "total_chlorophyll_mg_g": 2.727, "proline_umol_g": 1.963, "plant_height_cm": 100.2, "effective_tillers_hill": 13.9, "panicle_length_cm": 23.34, "filled_grains_per_panicle": 130.3, "test_weight_1000_g": 23.98, "grain_yield_tha": 6.65, "grain_yield_kgha": 6650.0, "straw_yield_tha": 7.514, "harvest_index_pct": 46.95, "water_savings_pct": 7.5}, {"plot_id": 15, "block": "R4", "treatment": "T3", "treatment_name": "Manual AWD (Pani Pipe)", "irrigation_mm": 501.8, "peff_mm": 25.0, "eta_mm": 517.4, "dp_mm": 88.5, "seep_mm": 11.4, "water_productivity_kg_m3": 1.313, "min_water_depth_cm": -22.0, "mean_stress_index": 0.034, "rwc_pct": 84.41, "spad": 40.25, "total_chlorophyll_mg_g": 2.722, "proline_umol_g": 1.903, "plant_height_cm": 101.0, "effective_tillers_hill": 14.6, "panicle_length_cm": 23.08, "filled_grains_per_panicle": 132.9, "test_weight_1000_g": 23.97, "grain_yield_tha": 6.587, "grain_yield_kgha": 6587.0, "straw_yield_tha": 7.396, "harvest_index_pct": 47.11, "water_savings_pct": 23.96}, {"plot_id": 16, "block": "R4", "treatment": "T1", "treatment_name": "Local Conventional Practice", "irrigation_mm": 658.7, "peff_mm": 25.0, "eta_mm": 528.1, "dp_mm": 198.8, "seep_mm": 21.2, "water_productivity_kg_m3": 1.004, "min_water_depth_cm": -14.9, "mean_stress_index": 0.0, "rwc_pct": 84.27, "spad": 40.43, "total_chlorophyll_mg_g": 2.71, "proline_umol_g": 1.936, "plant_height_cm": 100.5, "effective_tillers_hill": 13.9, "panicle_length_cm": 23.54, "filled_grains_per_panicle": 131.7, "test_weight_1000_g": 23.91, "grain_yield_tha": 6.613, "grain_yield_kgha": 6613.0, "straw_yield_tha": 7.57, "harvest_index_pct": 46.63, "water_savings_pct": 0.18}, {"plot_id": 17, "block": "R5", "treatment": "T3", "treatment_name": "Manual AWD (Pani Pipe)", "irrigation_mm": 503.0, "peff_mm": 25.0, "eta_mm": 518.1, "dp_mm": 88.3, "seep_mm": 11.0, "water_productivity_kg_m3": 1.314, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0313, "rwc_pct": 84.48, "spad": 40.01, "total_chlorophyll_mg_g": 2.704, "proline_umol_g": 1.889, "plant_height_cm": 100.6, "effective_tillers_hill": 14.5, "panicle_length_cm": 23.2, "filled_grains_per_panicle": 132.0, "test_weight_1000_g": 24.04, "grain_yield_tha": 6.607, "grain_yield_kgha": 6607.0, "straw_yield_tha": 7.523, "harvest_index_pct": 46.76, "water_savings_pct": 23.78}, {"plot_id": 18, "block": "R5", "treatment": "T4", "treatment_name": "Sensor-Guided Adaptive AWD", "irrigation_mm": 478.7, "peff_mm": 25.0, "eta_mm": 514.5, "dp_mm": 78.5, "seep_mm": 10.0, "water_productivity_kg_m3": 1.395, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0302, "rwc_pct": 84.6, "spad": 40.29, "total_chlorophyll_mg_g": 2.686, "proline_umol_g": 2.012, "plant_height_cm": 101.3, "effective_tillers_hill": 14.8, "panicle_length_cm": 23.33, "filled_grains_per_panicle": 131.5, "test_weight_1000_g": 24.0, "grain_yield_tha": 6.676, "grain_yield_kgha": 6676.0, "straw_yield_tha": 7.534, "harvest_index_pct": 46.98, "water_savings_pct": 27.46}, {"plot_id": 19, "block": "R5", "treatment": "T1", "treatment_name": "Local Conventional Practice", "irrigation_mm": 661.1, "peff_mm": 25.0, "eta_mm": 528.1, "dp_mm": 202.5, "seep_mm": 21.2, "water_productivity_kg_m3": 1.007, "min_water_depth_cm": -15.2, "mean_stress_index": 0.0, "rwc_pct": 84.44, "spad": 39.91, "total_chlorophyll_mg_g": 2.704, "proline_umol_g": 1.929, "plant_height_cm": 100.3, "effective_tillers_hill": 14.1, "panicle_length_cm": 23.41, "filled_grains_per_panicle": 133.7, "test_weight_1000_g": 23.99, "grain_yield_tha": 6.655, "grain_yield_kgha": 6655.0, "straw_yield_tha": 7.505, "harvest_index_pct": 47.0, "water_savings_pct": -0.18}, {"plot_id": 20, "block": "R5", "treatment": "T2", "treatment_name": "Standard Continuous Irrigation", "irrigation_mm": 610.1, "peff_mm": 25.0, "eta_mm": 527.6, "dp_mm": 161.3, "seep_mm": 20.0, "water_productivity_kg_m3": 1.093, "min_water_depth_cm": -20.1, "mean_stress_index": 0.0, "rwc_pct": 84.62, "spad": 39.97, "total_chlorophyll_mg_g": 2.65, "proline_umol_g": 1.934, "plant_height_cm": 100.5, "effective_tillers_hill": 13.7, "panicle_length_cm": 23.29, "filled_grains_per_panicle": 132.2, "test_weight_1000_g": 24.03, "grain_yield_tha": 6.668, "grain_yield_kgha": 6668.0, "straw_yield_tha": 7.538, "harvest_index_pct": 46.94, "water_savings_pct": 7.55}, {"plot_id": 21, "block": "Validation", "treatment": "Plot21", "treatment_name": "Independent Validation Plot 21", "irrigation_mm": 481.8, "peff_mm": 25.0, "eta_mm": 514.6, "dp_mm": 79.5, "seep_mm": 10.6, "water_savings_pct": 26.99, "water_productivity_kg_m3": 1.367, "min_water_depth_cm": -22.0, "mean_stress_index": 0.0314, "rwc_pct": 84.48, "spad": 40.32, "total_chlorophyll_mg_g": 2.702, "proline_umol_g": 1.962, "plant_height_cm": 100.3, "effective_tillers_hill": 14.5, "panicle_length_cm": 23.36, "filled_grains_per_panicle": 131.6, "test_weight_1000_g": 24.06, "grain_yield_tha": 6.584, "grain_yield_kgha": 6584.0, "straw_yield_tha": 7.457, "harvest_index_pct": 46.89}];
+    const DAILY_DATA = [{"day": 1, "t1_z_cm": 3.43, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.43, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 3.43, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 3.43, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 3.43, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 2, "t1_z_cm": 2.86, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.86, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.86, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 2.86, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 2.86, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 3, "t1_z_cm": 2.3, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.3, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.3, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 2.3, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 2.3, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 4, "t1_z_cm": 1.75, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.75, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.75, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 1.75, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.75, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 5, "t1_z_cm": 1.2, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.2, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.2, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 1.2, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.2, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 6, "t1_z_cm": 6.1, "t1_theta_v_pct": 48.5, "t1_irr_mm": 55.16, "t2_z_cm": 0.65, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.65, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.65, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.65, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 7, "t1_z_cm": 5.5, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 4.22, "t2_theta_v_pct": 48.5, "t2_irr_mm": 41.54, "t3_z_cm": 0.12, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.12, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.12, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 8, "t1_z_cm": 4.9, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.64, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -2.58, "t3_theta_v_pct": 48.07, "t3_irr_mm": 0.0, "t4_z_cm": -2.58, "t4_theta_v_pct": 48.07, "t4_irr_mm": 0.0, "plot21_z_cm": -2.58, "plot21_theta_v_pct": 48.07, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 9, "t1_z_cm": 4.31, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.06, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -5.09, "t3_theta_v_pct": 46.92, "t3_irr_mm": 0.0, "t4_z_cm": -5.09, "t4_theta_v_pct": 46.92, "t4_irr_mm": 0.0, "plot21_z_cm": -5.09, "plot21_theta_v_pct": 46.92, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 10, "t1_z_cm": 3.72, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.49, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -7.56, "t3_theta_v_pct": 45.27, "t3_irr_mm": 0.0, "t4_z_cm": -7.56, "t4_theta_v_pct": 45.27, "t4_irr_mm": 0.0, "plot21_z_cm": -7.56, "plot21_theta_v_pct": 45.27, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 11, "t1_z_cm": 3.14, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.93, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -10.0, "t3_theta_v_pct": 43.35, "t3_irr_mm": 0.0, "t4_z_cm": -10.0, "t4_theta_v_pct": 43.35, "t4_irr_mm": 0.0, "plot21_z_cm": -10.0, "plot21_theta_v_pct": 43.35, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 12, "t1_z_cm": 2.57, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.37, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -12.44, "t3_theta_v_pct": 41.31, "t3_irr_mm": 0.0, "t4_z_cm": -12.44, "t4_theta_v_pct": 41.31, "t4_irr_mm": 0.0, "plot21_z_cm": -12.44, "plot21_theta_v_pct": 41.31, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 13, "t1_z_cm": 2.0, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.81, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -14.88, "t3_theta_v_pct": 39.3, "t3_irr_mm": 0.0, "t4_z_cm": -14.88, "t4_theta_v_pct": 39.3, "t4_irr_mm": 0.0, "plot21_z_cm": -14.88, "plot21_theta_v_pct": 39.3, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 14, "t1_z_cm": 1.43, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 4.05, "t2_theta_v_pct": 48.5, "t2_irr_mm": 38.36, "t3_z_cm": -17.34, "t3_theta_v_pct": 37.37, "t3_irr_mm": 0.0, "t4_z_cm": -17.34, "t4_theta_v_pct": 37.37, "t4_irr_mm": 0.0, "plot21_z_cm": -17.34, "plot21_theta_v_pct": 37.37, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 15, "t1_z_cm": 6.28, "t1_theta_v_pct": 48.5, "t1_irr_mm": 54.67, "t2_z_cm": 3.46, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 3.74, "t3_theta_v_pct": 48.5, "t3_irr_mm": 71.05, "t4_z_cm": 3.06, "t4_theta_v_pct": 48.5, "t4_irr_mm": 64.15, "plot21_z_cm": 3.19, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 65.48, "peff_mm": 0.0}, {"day": 16, "t1_z_cm": 5.66, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.88, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 3.15, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 2.48, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 2.61, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 17, "t1_z_cm": 5.05, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.3, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.57, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 1.91, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 2.03, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 18, "t1_z_cm": 4.44, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.73, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.99, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 1.34, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.47, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 19, "t1_z_cm": 3.84, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.16, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.43, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.78, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.9, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 20, "t1_z_cm": 3.25, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.6, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.86, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.22, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.35, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 21, "t1_z_cm": 2.66, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.9, "t2_theta_v_pct": 48.5, "t2_irr_mm": 38.96, "t3_z_cm": 0.3, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -2.05, "t4_theta_v_pct": 48.23, "t4_irr_mm": 0.0, "plot21_z_cm": -1.29, "plot21_theta_v_pct": 48.39, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 22, "t1_z_cm": 2.04, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.26, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -1.8, "t3_theta_v_pct": 48.29, "t3_irr_mm": 0.0, "t4_z_cm": -4.92, "t4_theta_v_pct": 47.02, "t4_irr_mm": 0.0, "plot21_z_cm": -4.17, "plot21_theta_v_pct": 47.42, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 23, "t1_z_cm": 1.42, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.63, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -4.68, "t3_theta_v_pct": 47.15, "t3_irr_mm": 0.0, "t4_z_cm": -7.75, "t4_theta_v_pct": 45.13, "t4_irr_mm": 0.0, "plot21_z_cm": -7.02, "plot21_theta_v_pct": 45.67, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 24, "t1_z_cm": 6.4, "t1_theta_v_pct": 48.5, "t1_irr_mm": 56.55, "t2_z_cm": 2.01, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -7.53, "t3_theta_v_pct": 45.3, "t3_irr_mm": 0.0, "t4_z_cm": -10.54, "t4_theta_v_pct": 42.9, "t4_irr_mm": 0.0, "plot21_z_cm": -9.82, "plot21_theta_v_pct": 43.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 25, "t1_z_cm": 5.73, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.39, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -10.33, "t3_theta_v_pct": 43.07, "t3_irr_mm": 0.0, "t4_z_cm": -13.34, "t4_theta_v_pct": 40.56, "t4_irr_mm": 0.0, "plot21_z_cm": -12.61, "plot21_theta_v_pct": 41.17, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 26, "t1_z_cm": 5.06, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.78, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -13.14, "t3_theta_v_pct": 40.73, "t3_irr_mm": 0.0, "t4_z_cm": -16.14, "t4_theta_v_pct": 38.29, "t4_irr_mm": 0.0, "plot21_z_cm": -15.42, "plot21_theta_v_pct": 38.86, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 27, "t1_z_cm": 4.4, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.17, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -15.95, "t3_theta_v_pct": 38.44, "t3_irr_mm": 0.0, "t4_z_cm": -18.83, "t4_theta_v_pct": 36.27, "t4_irr_mm": 0.0, "plot21_z_cm": -18.19, "plot21_theta_v_pct": 36.74, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 28, "t1_z_cm": 3.75, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.7, "t2_theta_v_pct": 48.5, "t2_irr_mm": 41.77, "t3_z_cm": -18.67, "t3_theta_v_pct": 36.38, "t3_irr_mm": 0.0, "t4_z_cm": 2.66, "t4_theta_v_pct": 48.5, "t4_irr_mm": 63.16, "plot21_z_cm": 2.74, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 62.92, "peff_mm": 0.0}, {"day": 29, "t1_z_cm": 3.1, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.05, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 3.26, "t3_theta_v_pct": 48.5, "t3_irr_mm": 69.0, "t4_z_cm": 2.03, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 2.11, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 30, "t1_z_cm": 2.46, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.41, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.62, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 1.41, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.48, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 31, "t1_z_cm": 1.83, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.78, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.99, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.79, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.86, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 32, "t1_z_cm": 6.54, "t1_theta_v_pct": 48.5, "t1_irr_mm": 54.01, "t2_z_cm": 1.15, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.36, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.17, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.25, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 33, "t1_z_cm": 5.85, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.53, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.73, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -2.73, "t4_theta_v_pct": 48.03, "t4_irr_mm": 0.0, "plot21_z_cm": -2.27, "plot21_theta_v_pct": 48.17, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 34, "t1_z_cm": 5.17, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -0.51, "t2_theta_v_pct": 48.48, "t2_irr_mm": 0.0, "t3_z_cm": 0.12, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -5.71, "t4_theta_v_pct": 46.55, "t4_irr_mm": 0.0, "plot21_z_cm": -5.26, "plot21_theta_v_pct": 46.82, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 35, "t1_z_cm": 4.49, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.54, "t2_theta_v_pct": 48.5, "t2_irr_mm": 42.88, "t3_z_cm": -3.08, "t3_theta_v_pct": 47.9, "t3_irr_mm": 0.0, "t4_z_cm": -8.66, "t4_theta_v_pct": 44.43, "t4_irr_mm": 0.0, "plot21_z_cm": -8.22, "plot21_theta_v_pct": 44.78, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 36, "t1_z_cm": 3.83, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.89, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -6.08, "t3_theta_v_pct": 46.31, "t3_irr_mm": 0.0, "t4_z_cm": -11.57, "t4_theta_v_pct": 42.04, "t4_irr_mm": 0.0, "plot21_z_cm": -11.13, "plot21_theta_v_pct": 42.41, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 37, "t1_z_cm": 3.16, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.24, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -9.04, "t3_theta_v_pct": 44.12, "t3_irr_mm": 0.0, "t4_z_cm": -14.5, "t4_theta_v_pct": 39.61, "t4_irr_mm": 0.0, "plot21_z_cm": -14.06, "plot21_theta_v_pct": 39.97, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 38, "t1_z_cm": 2.51, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.6, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -11.98, "t3_theta_v_pct": 41.7, "t3_irr_mm": 0.0, "t4_z_cm": -17.44, "t4_theta_v_pct": 37.3, "t4_irr_mm": 0.0, "plot21_z_cm": -16.99, "plot21_theta_v_pct": 37.63, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 39, "t1_z_cm": 1.86, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.96, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -14.93, "t3_theta_v_pct": 39.26, "t3_irr_mm": 0.0, "t4_z_cm": -20.1, "t4_theta_v_pct": 35.38, "t4_irr_mm": 0.0, "plot21_z_cm": -19.71, "plot21_theta_v_pct": 35.65, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 40, "t1_z_cm": 6.66, "t1_theta_v_pct": 48.5, "t1_irr_mm": 55.12, "t2_z_cm": 0.33, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -17.89, "t3_theta_v_pct": 36.96, "t3_irr_mm": 0.0, "t4_z_cm": 2.37, "t4_theta_v_pct": 48.5, "t4_irr_mm": 62.45, "plot21_z_cm": 2.41, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 62.21, "peff_mm": 0.0}, {"day": 41, "t1_z_cm": 5.96, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -1.85, "t2_theta_v_pct": 48.28, "t2_irr_mm": 0.0, "t3_z_cm": -20.52, "t3_theta_v_pct": 35.09, "t3_irr_mm": 0.0, "t4_z_cm": 1.72, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.76, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 42, "t1_z_cm": 5.26, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.4, "t2_theta_v_pct": 48.5, "t2_irr_mm": 43.68, "t3_z_cm": 2.91, "t3_theta_v_pct": 48.5, "t3_irr_mm": 68.63, "t4_z_cm": 1.08, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.12, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 43, "t1_z_cm": 5.22, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.38, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.9, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 1.09, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.13, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 6.5}, {"day": 44, "t1_z_cm": 4.53, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.71, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.24, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.45, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.49, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 45, "t1_z_cm": 3.85, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.05, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.58, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -1.14, "t4_theta_v_pct": 48.42, "t4_irr_mm": 0.0, "plot21_z_cm": -0.92, "plot21_theta_v_pct": 48.45, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 46, "t1_z_cm": 3.17, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.4, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.93, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -4.29, "t4_theta_v_pct": 47.36, "t4_irr_mm": 0.0, "plot21_z_cm": -4.07, "plot21_theta_v_pct": 47.47, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 47, "t1_z_cm": 2.5, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.75, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.29, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -7.39, "t4_theta_v_pct": 45.4, "t4_irr_mm": 0.0, "plot21_z_cm": -7.18, "plot21_theta_v_pct": 45.55, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 48, "t1_z_cm": 1.83, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.1, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -2.16, "t3_theta_v_pct": 48.2, "t3_irr_mm": 0.0, "t4_z_cm": -10.46, "t4_theta_v_pct": 42.97, "t4_irr_mm": 0.0, "plot21_z_cm": -10.25, "plot21_theta_v_pct": 43.14, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 49, "t1_z_cm": 6.77, "t1_theta_v_pct": 48.5, "t1_irr_mm": 56.67, "t2_z_cm": 3.29, "t2_theta_v_pct": 48.5, "t2_irr_mm": 38.68, "t3_z_cm": -5.33, "t3_theta_v_pct": 46.78, "t3_irr_mm": 0.0, "t4_z_cm": -13.52, "t4_theta_v_pct": 40.41, "t4_irr_mm": 0.0, "plot21_z_cm": -13.32, "plot21_theta_v_pct": 40.58, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 50, "t1_z_cm": 6.05, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.61, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -8.46, "t3_theta_v_pct": 44.59, "t3_irr_mm": 0.0, "t4_z_cm": -16.6, "t4_theta_v_pct": 37.93, "t4_irr_mm": 0.0, "plot21_z_cm": -16.39, "plot21_theta_v_pct": 38.1, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 51, "t1_z_cm": 5.33, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.94, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -11.55, "t3_theta_v_pct": 42.06, "t3_irr_mm": 0.0, "t4_z_cm": -19.49, "t4_theta_v_pct": 35.8, "t4_irr_mm": 0.0, "plot21_z_cm": -19.31, "plot21_theta_v_pct": 35.93, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 52, "t1_z_cm": 4.63, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.27, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -14.65, "t3_theta_v_pct": 39.49, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -21.88, "plot21_theta_v_pct": 34.2, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 53, "t1_z_cm": 3.92, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.61, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -17.76, "t3_theta_v_pct": 37.05, "t3_irr_mm": 0.0, "t4_z_cm": 2.29, "t4_theta_v_pct": 48.5, "t4_irr_mm": 64.93, "plot21_z_cm": 2.29, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 64.67, "peff_mm": 0.0}, {"day": 54, "t1_z_cm": 3.23, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -0.25, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -20.54, "t3_theta_v_pct": 35.08, "t3_irr_mm": 0.0, "t4_z_cm": 1.62, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.61, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 55, "t1_z_cm": 2.54, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.17, "t2_theta_v_pct": 48.5, "t2_irr_mm": 39.08, "t3_z_cm": -22.0, "t3_theta_v_pct": 34.12, "t3_irr_mm": 0.0, "t4_z_cm": 0.95, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.95, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 56, "t1_z_cm": 1.86, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.48, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.96, "t3_theta_v_pct": 48.5, "t3_irr_mm": 71.74, "t4_z_cm": 0.29, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.28, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 57, "t1_z_cm": 6.88, "t1_theta_v_pct": 48.5, "t1_irr_mm": 57.65, "t2_z_cm": 1.8, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.27, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -2.28, "t4_theta_v_pct": 48.17, "t4_irr_mm": 0.0, "plot21_z_cm": -2.32, "plot21_theta_v_pct": 48.16, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 58, "t1_z_cm": 6.14, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.13, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.59, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -5.55, "t4_theta_v_pct": 46.65, "t4_irr_mm": 0.0, "plot21_z_cm": -5.59, "plot21_theta_v_pct": 46.63, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 59, "t1_z_cm": 5.38, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.43, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.88, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.5, "t4_theta_v_pct": 48.5, "t4_irr_mm": 20.93, "plot21_z_cm": 0.49, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 20.9, "peff_mm": 0.0}, {"day": 60, "t1_z_cm": 4.62, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -1.67, "t2_theta_v_pct": 48.32, "t2_irr_mm": 0.0, "t3_z_cm": 0.19, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -1.2, "t4_theta_v_pct": 48.41, "t4_irr_mm": 0.0, "plot21_z_cm": -1.25, "plot21_theta_v_pct": 48.4, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 61, "t1_z_cm": 3.87, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.03, "t2_theta_v_pct": 48.5, "t2_irr_mm": 40.32, "t3_z_cm": -3.17, "t3_theta_v_pct": 47.86, "t3_irr_mm": 0.0, "t4_z_cm": -4.73, "t4_theta_v_pct": 47.13, "t4_irr_mm": 0.0, "plot21_z_cm": -4.78, "plot21_theta_v_pct": 47.1, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 62, "t1_z_cm": 3.13, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.3, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.67, "t3_theta_v_pct": 48.5, "t3_irr_mm": 18.83, "t4_z_cm": 0.49, "t4_theta_v_pct": 48.5, "t4_irr_mm": 19.57, "plot21_z_cm": 0.48, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 19.49, "peff_mm": 0.0}, {"day": 63, "t1_z_cm": 2.4, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.57, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -0.23, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -1.29, "t4_theta_v_pct": 48.39, "t4_irr_mm": 0.0, "plot21_z_cm": -1.39, "plot21_theta_v_pct": 48.37, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 64, "t1_z_cm": 6.94, "t1_theta_v_pct": 48.5, "t1_irr_mm": 53.38, "t2_z_cm": 0.86, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -3.82, "t3_theta_v_pct": 47.59, "t3_irr_mm": 0.0, "t4_z_cm": -4.86, "t4_theta_v_pct": 47.06, "t4_irr_mm": 0.0, "plot21_z_cm": -4.96, "plot21_theta_v_pct": 47.0, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 65, "t1_z_cm": 6.16, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.15, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.65, "t3_theta_v_pct": 48.5, "t3_irr_mm": 19.75, "t4_z_cm": 0.48, "t4_theta_v_pct": 48.5, "t4_irr_mm": 19.75, "plot21_z_cm": 0.46, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 19.66, "peff_mm": 0.0}, {"day": 66, "t1_z_cm": 5.38, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -3.47, "t2_theta_v_pct": 47.74, "t2_irr_mm": 0.0, "t3_z_cm": -0.38, "t3_theta_v_pct": 48.49, "t3_irr_mm": 0.0, "t4_z_cm": -1.4, "t4_theta_v_pct": 48.37, "t4_irr_mm": 0.0, "plot21_z_cm": -1.55, "plot21_theta_v_pct": 48.35, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 67, "t1_z_cm": 5.61, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.91, "t2_theta_v_pct": 48.5, "t2_irr_mm": 42.16, "t3_z_cm": 0.36, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.2, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.18, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 10.0}, {"day": 68, "t1_z_cm": 4.84, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 3.16, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -2.19, "t3_theta_v_pct": 48.19, "t3_irr_mm": 0.0, "t4_z_cm": -3.18, "t4_theta_v_pct": 47.86, "t4_irr_mm": 0.0, "plot21_z_cm": -3.32, "plot21_theta_v_pct": 47.8, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 69, "t1_z_cm": 4.07, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.41, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -5.81, "t3_theta_v_pct": 46.49, "t3_irr_mm": 0.0, "t4_z_cm": 0.5, "t4_theta_v_pct": 48.5, "t4_irr_mm": 17.35, "plot21_z_cm": 0.48, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 17.31, "peff_mm": 0.0}, {"day": 70, "t1_z_cm": 3.31, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.67, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.74, "t3_theta_v_pct": 48.5, "t3_irr_mm": 23.99, "t4_z_cm": -1.32, "t4_theta_v_pct": 48.39, "t4_irr_mm": 0.0, "plot21_z_cm": -1.49, "plot21_theta_v_pct": 48.36, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 71, "t1_z_cm": 2.55, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.94, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.02, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -4.98, "t4_theta_v_pct": 46.99, "t4_irr_mm": 0.0, "plot21_z_cm": -5.15, "plot21_theta_v_pct": 46.89, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 72, "t1_z_cm": 7.01, "t1_theta_v_pct": 48.5, "t1_irr_mm": 52.7, "t2_z_cm": 0.21, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -4.33, "t3_theta_v_pct": 47.34, "t3_irr_mm": 0.0, "t4_z_cm": 0.49, "t4_theta_v_pct": 48.5, "t4_irr_mm": 20.16, "plot21_z_cm": 0.45, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 20.07, "peff_mm": 0.0}, {"day": 73, "t1_z_cm": 6.21, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -3.17, "t2_theta_v_pct": 47.87, "t2_irr_mm": 0.0, "t3_z_cm": 0.6, "t3_theta_v_pct": 48.5, "t3_irr_mm": 20.22, "t4_z_cm": -1.46, "t4_theta_v_pct": 48.36, "t4_irr_mm": 0.0, "plot21_z_cm": -1.67, "plot21_theta_v_pct": 48.32, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 74, "t1_z_cm": 5.44, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.85, "t2_theta_v_pct": 48.5, "t2_irr_mm": 40.92, "t3_z_cm": -0.61, "t3_theta_v_pct": 48.48, "t3_irr_mm": 0.0, "t4_z_cm": -4.95, "t4_theta_v_pct": 47.01, "t4_irr_mm": 0.0, "plot21_z_cm": -5.16, "plot21_theta_v_pct": 46.88, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 75, "t1_z_cm": 4.69, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.14, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -4.1, "t3_theta_v_pct": 47.45, "t3_irr_mm": 0.0, "t4_z_cm": -8.37, "t4_theta_v_pct": 44.66, "t4_irr_mm": 0.0, "plot21_z_cm": -8.58, "plot21_theta_v_pct": 44.49, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 76, "t1_z_cm": 3.95, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.43, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -7.53, "t3_theta_v_pct": 45.29, "t3_irr_mm": 0.0, "t4_z_cm": -11.73, "t4_theta_v_pct": 41.91, "t4_irr_mm": 0.0, "plot21_z_cm": -11.94, "plot21_theta_v_pct": 41.73, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 77, "t1_z_cm": 3.22, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.73, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -10.89, "t3_theta_v_pct": 42.61, "t3_irr_mm": 0.0, "t4_z_cm": -15.08, "t4_theta_v_pct": 39.14, "t4_irr_mm": 0.0, "plot21_z_cm": -15.29, "plot21_theta_v_pct": 38.97, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 78, "t1_z_cm": 2.5, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.04, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -14.23, "t3_theta_v_pct": 39.83, "t3_irr_mm": 0.0, "t4_z_cm": -18.41, "t4_theta_v_pct": 36.58, "t4_irr_mm": 0.0, "plot21_z_cm": -18.59, "plot21_theta_v_pct": 36.45, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 79, "t1_z_cm": 7.14, "t1_theta_v_pct": 48.5, "t1_irr_mm": 54.2, "t2_z_cm": -3.99, "t2_theta_v_pct": 47.51, "t2_irr_mm": 0.0, "t3_z_cm": -17.56, "t3_theta_v_pct": 37.21, "t3_irr_mm": 0.0, "t4_z_cm": -21.28, "t4_theta_v_pct": 34.59, "t4_irr_mm": 0.0, "plot21_z_cm": -21.44, "plot21_theta_v_pct": 34.48, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 80, "t1_z_cm": 6.38, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.78, "t2_theta_v_pct": 48.5, "t2_irr_mm": 41.37, "t3_z_cm": -20.54, "t3_theta_v_pct": 35.08, "t3_irr_mm": 0.0, "t4_z_cm": 2.16, "t4_theta_v_pct": 48.5, "t4_irr_mm": 62.77, "plot21_z_cm": 2.1, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 62.44, "peff_mm": 0.0}, {"day": 81, "t1_z_cm": 5.63, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.07, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -22.0, "t3_theta_v_pct": 34.12, "t3_irr_mm": 0.0, "t4_z_cm": 1.46, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.4, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 82, "t1_z_cm": 4.88, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.37, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.85, "t3_theta_v_pct": 48.5, "t3_irr_mm": 70.85, "t4_z_cm": 0.77, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.71, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 83, "t1_z_cm": 4.15, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.68, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.14, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": 0.09, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 0.03, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 84, "t1_z_cm": 3.43, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.01, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.45, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -3.64, "t4_theta_v_pct": 47.67, "t4_irr_mm": 0.0, "plot21_z_cm": -3.98, "plot21_theta_v_pct": 47.51, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 85, "t1_z_cm": 2.72, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -4.14, "t2_theta_v_pct": 47.44, "t2_irr_mm": 0.0, "t3_z_cm": 0.76, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -6.98, "t4_theta_v_pct": 45.7, "t4_irr_mm": 0.0, "plot21_z_cm": -7.32, "plot21_theta_v_pct": 45.45, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 86, "t1_z_cm": 8.09, "t1_theta_v_pct": 48.5, "t1_irr_mm": 52.86, "t2_z_cm": 3.56, "t2_theta_v_pct": 48.5, "t2_irr_mm": 40.81, "t3_z_cm": 0.94, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -4.94, "t4_theta_v_pct": 47.01, "t4_irr_mm": 0.0, "plot21_z_cm": -5.27, "plot21_theta_v_pct": 46.82, "plot21_irr_mm": 0.0, "peff_mm": 8.5}, {"day": 87, "t1_z_cm": 7.33, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.85, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 0.26, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -8.23, "t4_theta_v_pct": 44.76, "t4_irr_mm": 0.0, "plot21_z_cm": -8.56, "plot21_theta_v_pct": 44.51, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 88, "t1_z_cm": 6.57, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.16, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -2.53, "t3_theta_v_pct": 48.09, "t3_irr_mm": 0.0, "t4_z_cm": -11.46, "t4_theta_v_pct": 42.13, "t4_irr_mm": 0.0, "plot21_z_cm": -11.79, "plot21_theta_v_pct": 41.86, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 89, "t1_z_cm": 5.83, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.47, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -5.85, "t3_theta_v_pct": 46.46, "t3_irr_mm": 0.0, "t4_z_cm": -14.68, "t4_theta_v_pct": 39.46, "t4_irr_mm": 0.0, "plot21_z_cm": -15.01, "plot21_theta_v_pct": 39.19, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 90, "t1_z_cm": 5.1, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.79, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -9.09, "t3_theta_v_pct": 44.08, "t3_irr_mm": 0.0, "t4_z_cm": -17.89, "t4_theta_v_pct": 36.96, "t4_irr_mm": 0.0, "plot21_z_cm": -18.21, "plot21_theta_v_pct": 36.72, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 91, "t1_z_cm": 4.38, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.13, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -12.29, "t3_theta_v_pct": 41.44, "t3_irr_mm": 0.0, "t4_z_cm": -20.71, "t4_theta_v_pct": 34.96, "t4_irr_mm": 0.0, "plot21_z_cm": -21.0, "plot21_theta_v_pct": 34.77, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 92, "t1_z_cm": 3.67, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -3.31, "t2_theta_v_pct": 47.81, "t2_irr_mm": 0.0, "t3_z_cm": -15.47, "t3_theta_v_pct": 38.82, "t3_irr_mm": 0.0, "t4_z_cm": 2.11, "t4_theta_v_pct": 48.5, "t4_irr_mm": 61.17, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 93, "t1_z_cm": 2.97, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.68, "t2_theta_v_pct": 48.5, "t2_irr_mm": 39.03, "t3_z_cm": -18.58, "t3_theta_v_pct": 36.45, "t3_irr_mm": 0.0, "t4_z_cm": 1.43, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 2.45, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 66.64, "peff_mm": 0.0}, {"day": 94, "t1_z_cm": 2.28, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.99, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -21.29, "t3_theta_v_pct": 34.58, "t3_irr_mm": 0.0, "t4_z_cm": 0.77, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.77, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 95, "t1_z_cm": 7.32, "t1_theta_v_pct": 48.5, "t1_irr_mm": 57.83, "t2_z_cm": 1.32, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.74, "t3_theta_v_pct": 48.5, "t3_irr_mm": 68.33, "t4_z_cm": 0.11, "t4_theta_v_pct": 48.5, "t4_irr_mm": 0.0, "plot21_z_cm": 1.1, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 96, "t1_z_cm": 6.58, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.66, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 2.06, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -3.37, "t4_theta_v_pct": 47.79, "t4_irr_mm": 0.0, "plot21_z_cm": 0.44, "plot21_theta_v_pct": 48.5, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 97, "t1_z_cm": 5.86, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.01, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": 1.39, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -6.57, "t4_theta_v_pct": 45.99, "t4_irr_mm": 0.0, "plot21_z_cm": -1.3, "plot21_theta_v_pct": 48.39, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 98, "t1_z_cm": 5.14, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -3.97, "t2_theta_v_pct": 47.52, "t2_irr_mm": 0.0, "t3_z_cm": 0.73, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -9.7, "t4_theta_v_pct": 43.59, "t4_irr_mm": 0.0, "plot21_z_cm": -4.52, "plot21_theta_v_pct": 47.24, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 99, "t1_z_cm": 4.44, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 2.63, "t2_theta_v_pct": 48.5, "t2_irr_mm": 39.45, "t3_z_cm": 0.08, "t3_theta_v_pct": 48.5, "t3_irr_mm": 0.0, "t4_z_cm": -12.79, "t4_theta_v_pct": 41.02, "t4_irr_mm": 0.0, "plot21_z_cm": -7.68, "plot21_theta_v_pct": 45.19, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 100, "t1_z_cm": 3.74, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.96, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -3.5, "t3_theta_v_pct": 47.73, "t3_irr_mm": 0.0, "t4_z_cm": -15.87, "t4_theta_v_pct": 38.51, "t4_irr_mm": 0.0, "plot21_z_cm": -10.76, "plot21_theta_v_pct": 42.72, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 101, "t1_z_cm": 3.08, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 1.32, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -6.51, "t3_theta_v_pct": 46.03, "t3_irr_mm": 0.0, "t4_z_cm": -18.7, "t4_theta_v_pct": 36.37, "t4_irr_mm": 0.0, "plot21_z_cm": -13.69, "plot21_theta_v_pct": 40.27, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 102, "t1_z_cm": 2.43, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.69, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -9.47, "t3_theta_v_pct": 43.78, "t3_irr_mm": 0.0, "t4_z_cm": -21.2, "t4_theta_v_pct": 34.64, "t4_irr_mm": 0.0, "plot21_z_cm": -16.63, "plot21_theta_v_pct": 37.91, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 103, "t1_z_cm": 1.78, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": 0.06, "t2_theta_v_pct": 48.5, "t2_irr_mm": 0.0, "t3_z_cm": -12.42, "t3_theta_v_pct": 41.33, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -19.39, "plot21_theta_v_pct": 35.87, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 104, "t1_z_cm": 1.14, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -3.48, "t2_theta_v_pct": 47.74, "t2_irr_mm": 0.0, "t3_z_cm": -15.38, "t3_theta_v_pct": 38.89, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -21.83, "plot21_theta_v_pct": 34.23, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 105, "t1_z_cm": 0.51, "t1_theta_v_pct": 48.5, "t1_irr_mm": 0.0, "t2_z_cm": -6.53, "t2_theta_v_pct": 46.01, "t2_irr_mm": 0.0, "t3_z_cm": -18.31, "t3_theta_v_pct": 36.65, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 106, "t1_z_cm": -0.77, "t1_theta_v_pct": 48.46, "t1_irr_mm": 0.0, "t2_z_cm": -9.54, "t2_theta_v_pct": 43.72, "t2_irr_mm": 0.0, "t3_z_cm": -20.9, "t3_theta_v_pct": 34.84, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 107, "t1_z_cm": -3.89, "t1_theta_v_pct": 47.56, "t1_irr_mm": 0.0, "t2_z_cm": -12.53, "t2_theta_v_pct": 41.23, "t2_irr_mm": 0.0, "t3_z_cm": -22.0, "t3_theta_v_pct": 34.12, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 108, "t1_z_cm": -6.96, "t1_theta_v_pct": 45.71, "t1_irr_mm": 0.0, "t2_z_cm": -15.54, "t2_theta_v_pct": 38.77, "t2_irr_mm": 0.0, "t3_z_cm": -22.0, "t3_theta_v_pct": 34.12, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 109, "t1_z_cm": -10.0, "t1_theta_v_pct": 43.35, "t1_irr_mm": 0.0, "t2_z_cm": -18.49, "t2_theta_v_pct": 36.52, "t2_irr_mm": 0.0, "t3_z_cm": -22.0, "t3_theta_v_pct": 34.12, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}, {"day": 110, "t1_z_cm": -13.02, "t1_theta_v_pct": 40.82, "t1_irr_mm": 0.0, "t2_z_cm": -21.09, "t2_theta_v_pct": 34.71, "t2_irr_mm": 0.0, "t3_z_cm": -22.0, "t3_theta_v_pct": 34.12, "t3_irr_mm": 0.0, "t4_z_cm": -22.0, "t4_theta_v_pct": 34.12, "t4_irr_mm": 0.0, "plot21_z_cm": -22.0, "plot21_theta_v_pct": 34.12, "plot21_irr_mm": 0.0, "peff_mm": 0.0}];
+    const SWEEP_DATA = [{"threshold_cm": 0.0, "irrigation_mm": 660.0, "water_saved_pct": 0.0, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.0, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -1.0, "irrigation_mm": 647.7, "water_saved_pct": 1.87, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.019, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -2.0, "irrigation_mm": 635.4, "water_saved_pct": 3.73, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.039, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -3.0, "irrigation_mm": 623.0, "water_saved_pct": 5.6, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.059, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -4.0, "irrigation_mm": 610.7, "water_saved_pct": 7.47, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.081, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -5.0, "irrigation_mm": 598.4, "water_saved_pct": 9.33, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.103, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -6.0, "irrigation_mm": 586.1, "water_saved_pct": 11.2, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.126, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -7.0, "irrigation_mm": 573.8, "water_saved_pct": 13.07, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.15, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -8.0, "irrigation_mm": 561.4, "water_saved_pct": 14.93, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.176, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -9.0, "irrigation_mm": 549.1, "water_saved_pct": 16.8, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.202, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -10.0, "irrigation_mm": 536.8, "water_saved_pct": 18.67, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.23, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -11.0, "irrigation_mm": 524.5, "water_saved_pct": 20.53, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.258, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -12.0, "irrigation_mm": 512.2, "water_saved_pct": 22.4, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.289, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -13.0, "irrigation_mm": 499.8, "water_saved_pct": 24.27, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.32, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -14.0, "irrigation_mm": 487.5, "water_saved_pct": 26.13, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.354, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -15.0, "irrigation_mm": 475.2, "water_saved_pct": 28.0, "grain_yield_tha": 6.6, "yield_loss_pct": 0.0, "water_productivity_kg_m3": 1.389, "rwc_pct": 84.4, "spad": 40.2, "proline_umol_g": 1.94, "mean_stress_index": 0.0, "capillary_status": "Capillary Intact (Safety Zone)"}, {"threshold_cm": -16.0, "irrigation_mm": 470.6, "water_saved_pct": 28.7, "grain_yield_tha": 6.42, "yield_loss_pct": 2.72, "water_productivity_kg_m3": 1.364, "rwc_pct": 84.14, "spad": 40.04, "proline_umol_g": 2.2, "mean_stress_index": 0.018, "capillary_status": "Transition Vulnerability"}, {"threshold_cm": -17.0, "irrigation_mm": 466.0, "water_saved_pct": 29.4, "grain_yield_tha": 6.18, "yield_loss_pct": 6.29, "water_productivity_kg_m3": 1.327, "rwc_pct": 83.82, "spad": 39.84, "proline_umol_g": 2.54, "mean_stress_index": 0.0399, "capillary_status": "Transition Vulnerability"}, {"threshold_cm": -18.0, "irrigation_mm": 461.3, "water_saved_pct": 30.1, "grain_yield_tha": 5.92, "yield_loss_pct": 10.26, "water_productivity_kg_m3": 1.284, "rwc_pct": 83.48, "spad": 39.63, "proline_umol_g": 2.92, "mean_stress_index": 0.0637, "capillary_status": "Transition Vulnerability"}, {"threshold_cm": -19.0, "irrigation_mm": 456.7, "water_saved_pct": 30.8, "grain_yield_tha": 5.64, "yield_loss_pct": 14.53, "water_productivity_kg_m3": 1.235, "rwc_pct": 83.11, "spad": 39.4, "proline_umol_g": 3.34, "mean_stress_index": 0.0886, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -20.0, "irrigation_mm": 452.1, "water_saved_pct": 31.5, "grain_yield_tha": 5.34, "yield_loss_pct": 19.02, "water_productivity_kg_m3": 1.182, "rwc_pct": 82.74, "spad": 39.17, "proline_umol_g": 3.8, "mean_stress_index": 0.1146, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -21.0, "irrigation_mm": 447.5, "water_saved_pct": 32.2, "grain_yield_tha": 5.04, "yield_loss_pct": 23.7, "water_productivity_kg_m3": 1.125, "rwc_pct": 82.35, "spad": 38.93, "proline_umol_g": 4.31, "mean_stress_index": 0.1413, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -22.0, "irrigation_mm": 442.9, "water_saved_pct": 32.9, "grain_yield_tha": 4.72, "yield_loss_pct": 28.55, "water_productivity_kg_m3": 1.065, "rwc_pct": 81.95, "spad": 38.68, "proline_umol_g": 4.86, "mean_stress_index": 0.1687, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -23.0, "irrigation_mm": 438.2, "water_saved_pct": 33.6, "grain_yield_tha": 4.39, "yield_loss_pct": 33.55, "water_productivity_kg_m3": 1.001, "rwc_pct": 81.55, "spad": 38.43, "proline_umol_g": 5.46, "mean_stress_index": 0.1967, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -24.0, "irrigation_mm": 433.6, "water_saved_pct": 34.3, "grain_yield_tha": 4.05, "yield_loss_pct": 38.68, "water_productivity_kg_m3": 0.933, "rwc_pct": 81.13, "spad": 38.17, "proline_umol_g": 6.11, "mean_stress_index": 0.2252, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -25.0, "irrigation_mm": 429.0, "water_saved_pct": 35.0, "grain_yield_tha": 3.7, "yield_loss_pct": 43.92, "water_productivity_kg_m3": 0.863, "rwc_pct": 80.71, "spad": 37.91, "proline_umol_g": 6.81, "mean_stress_index": 0.2543, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -26.0, "irrigation_mm": 424.4, "water_saved_pct": 35.7, "grain_yield_tha": 3.35, "yield_loss_pct": 49.28, "water_productivity_kg_m3": 0.789, "rwc_pct": 80.29, "spad": 37.65, "proline_umol_g": 7.57, "mean_stress_index": 0.2837, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -27.0, "irrigation_mm": 419.8, "water_saved_pct": 36.4, "grain_yield_tha": 3.3, "yield_loss_pct": 50.0, "water_productivity_kg_m3": 0.786, "rwc_pct": 79.85, "spad": 37.38, "proline_umol_g": 8.4, "mean_stress_index": 0.3136, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -28.0, "irrigation_mm": 415.1, "water_saved_pct": 37.1, "grain_yield_tha": 3.3, "yield_loss_pct": 50.0, "water_productivity_kg_m3": 0.795, "rwc_pct": 79.41, "spad": 37.11, "proline_umol_g": 9.29, "mean_stress_index": 0.3438, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -29.0, "irrigation_mm": 410.5, "water_saved_pct": 37.8, "grain_yield_tha": 3.3, "yield_loss_pct": 50.0, "water_productivity_kg_m3": 0.804, "rwc_pct": 78.97, "spad": 36.83, "proline_umol_g": 10.25, "mean_stress_index": 0.3744, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}, {"threshold_cm": -30.0, "irrigation_mm": 405.9, "water_saved_pct": 38.5, "grain_yield_tha": 3.3, "yield_loss_pct": 50.0, "water_productivity_kg_m3": 0.813, "rwc_pct": 78.6, "spad": 36.6, "proline_umol_g": 11.11, "mean_stress_index": 0.4, "capillary_status": "Severe Capillary Disconnection (Stress Rupture)"}];
+
+    // Application State
+    let simZ = -15.0;
+    let selectedPlotId = 4;
+    let currentHeatmapMetric = 'water_productivity_kg_m3';
+    let plot21Spotlight = false;
+    let animFrameId = null;
+    let animTimestamp = 0;
+    let dryingInterval = null;
+
+    // ========================================================================
+    // Biophysical Equations
+    // ========================================================================
+    function vanGenuchten(z) {
+      if (z >= 0) return 48.5;
+      const theta_s = 48.5, theta_r = 12.0, alpha = 0.05965, n = 2.0;
+      const m = 1.0 - (1.0 / n);
+      const absZ = Math.abs(z);
+      return theta_r + (theta_s - theta_r) / Math.pow(1.0 + Math.pow(alpha * absZ, n), m);
+    }
+
+    function calcMatricPotential(z) {
+      if (z >= 0) return 0.0;
+      const absZ = Math.abs(z);
+      if (absZ <= 15.0) return -(absZ * 1.12);
+      return -(16.8 + Math.pow((absZ - 15.0) * 1.8, 1.45));
+    }
+
+    function calcDeepPercolation(z) {
+      const Kpan = 1.25, Lpan = 10.0;
+      if (z > 0) return Kpan * (1.0 + z / Lpan) * 1.9;
+      if (z > -8.0) return Kpan * 0.18 * ((z + 8.0) / 8.0);
+      return 0.0;
+    }
+
+    function calcProline(z) {
+      if (z >= -15.0) return 1.94 + 0.04 * Math.sin(Math.abs(z));
+      const s = Math.max(0.0, (-15.0 - z) / 15.0);
+      return 1.94 + 6.5 * (Math.exp(2.2 * s) - 1.0);
+    }
+
+    function calcRWC(z) {
+      if (z >= -15.0) return 84.4;
+      const s = Math.max(0.0, (-15.0 - z) / 15.0);
+      return Math.max(62.0, 84.4 - 14.5 * s);
+    }
+
+    function calcSPAD(z) {
+      if (z >= -15.0) return 40.2;
+      const s = Math.max(0.0, (-15.0 - z) / 15.0);
+      return Math.max(28.0, 40.2 - 9.0 * s);
+    }
+
+    // ========================================================================
+    // MASTER DUAL DISPLAY: Coupled Soil Cross-Section + Virtual Assay Lab
+    // ========================================================================
+    function onMasterDepthInput(val) {
+      simZ = val;
+      document.getElementById('lbl-master-depth').innerText = (simZ > 0 ? '+' : '') + simZ.toFixed(1) + ' cm';
+      updateMasterMetrics();
+      updateAssayLab(simZ);
+    }
+
+    function setMasterDepth(val) {
+      const slider = document.getElementById('slider-master-depth');
+      slider.value = val;
+      onMasterDepthInput(val);
+    }
+
+    function updateMasterMetrics() {
+      const theta = vanGenuchten(simZ);
+      const matric = calcMatricPotential(simZ);
+      const dp = calcDeepPercolation(simZ);
+      const pro = calcProline(simZ);
+
+      document.getElementById('kpi-theta').innerText = theta.toFixed(1) + '%';
+      document.getElementById('kpi-matric').innerText = matric.toFixed(1) + ' kPa';
+      document.getElementById('kpi-dp').innerText = dp.toFixed(1) + ' mm/d';
+
+      const badgeCap = document.getElementById('badge-capillary-status');
+      const boxAdv = document.getElementById('box-physics-advisory');
+
+      if (simZ > 0) {
+        badgeCap.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200';
+        badgeCap.innerText = 'Ponded Submergence';
+        boxAdv.className = 'p-3 bg-blue-50/60 border border-blue-200 rounded-lg text-xs leading-relaxed text-blue-900';
+        boxAdv.innerHTML = '<strong>Ponded Hydrostatic Head:</strong> Standing water (+ ' + simZ.toFixed(1) + ' cm) exerts downward hydrostatic head, causing active percolation loss (' + dp.toFixed(1) + ' mm/day) through the plough pan.';
+      } else if (simZ >= -15.0) {
+        badgeCap.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200';
+        badgeCap.innerText = 'Capillary Continuity Intact';
+        boxAdv.className = 'p-3 bg-emerald-50/60 border border-emerald-200 rounded-lg text-xs leading-relaxed text-emerald-900';
+        boxAdv.innerHTML = '<strong>Capillary Fringe Replenishment:</strong> Perched water at ' + simZ.toFixed(1) + ' cm continuously wicks upward into the root zone (θv = ' + theta.toFixed(1) + '%). Deep percolation drops to zero. Proline remains at non-stressed baseline (1.94 µmol/g FW).';
+      } else if (simZ >= -18.0) {
+        badgeCap.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200';
+        badgeCap.innerText = 'Approaching Capillary Limit';
+        boxAdv.className = 'p-3 bg-amber-50/60 border border-amber-200 rounded-lg text-xs leading-relaxed text-amber-900';
+        boxAdv.innerHTML = '<strong>Capillary Tension Warning:</strong> Water table dropping past -15 cm. Upward capillary flux is breaking. Soil matric potential dropping below -25 kPa.';
+      } else {
+        badgeCap.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-800 border border-red-200 animate-pulse';
+        badgeCap.innerText = 'Capillary Continuity Broken — Stress Initiated';
+        boxAdv.className = 'p-3 bg-red-50/70 border border-red-200 rounded-lg text-xs leading-relaxed text-red-900';
+        boxAdv.innerHTML = '<strong>Capillary Continuity Broken:</strong> Water table fell below capillary reach. Root hairs are desiccating, free proline surged to ' + pro.toFixed(2) + ' µmol/g FW, triggering spikelet sterility (> 12% yield loss).';
+      }
+    }
+
+    function renderCanvas() {
+      const canvas = document.getElementById('cross-section-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Depth mapping: +10 cm (top, y=30) to -30 cm (bottom, y=430)
+      const topDepth = 10.0, bottomDepth = -30.0;
+      const totalDepth = topDepth - bottomDepth; // 40 cm
+      const plotTopY = 30, plotBottomY = 430;
+      const plotH = plotBottomY - plotTopY;
+
+      const depthToY = z => plotTopY + ((topDepth - z) / totalDepth) * plotH;
+
+      const surfaceY = depthToY(0.0);
+      const panY = depthToY(-22.0);
+      const waterY = depthToY(simZ);
+      const critY = depthToY(-15.0);
+
+      // 1. Sky / Atmosphere Background
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(45, 0, w - 45, surfaceY);
+
+      // 2. Soil Profile Background
+      const isStressed = simZ < -15.0;
+      ctx.fillStyle = isStressed ? '#e2d5c4' : '#d7c7b2';
+      ctx.fillRect(45, surfaceY, w - 45, panY - surfaceY);
+
+      // 3. Dense Plough Pan (-22 cm to -30 cm)
+      ctx.fillStyle = '#4a3b32';
+      ctx.fillRect(45, panY, w - 45, plotBottomY - panY);
+
+      // Diagonal Hatching on Plough Pan
+      ctx.strokeStyle = '#382b24';
+      ctx.lineWidth = 1.0;
+      ctx.beginPath();
+      for (let x = 45; x < w; x += 14) {
+        ctx.moveTo(x, panY);
+        ctx.lineTo(x + 16, plotBottomY);
+      }
+      ctx.stroke();
+
+      // 4. Perched Groundwater Table (or Ponded Water)
+      if (simZ > 0) {
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.45)';
+        ctx.fillRect(45, waterY, w - 45, surfaceY - waterY);
+        ctx.strokeStyle = '#0284c7';
+        ctx.lineWidth = 2.0;
+        ctx.beginPath();
+        ctx.moveTo(45, waterY);
+        ctx.lineTo(w, waterY);
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = 'rgba(2, 132, 199, 0.40)';
+        ctx.fillRect(45, waterY, w - 45, panY - waterY);
+        ctx.strokeStyle = '#0369a1';
+        ctx.lineWidth = 2.0;
+        ctx.setLineDash([6, 3]);
+        ctx.beginPath();
+        ctx.moveTo(45, waterY);
+        ctx.lineTo(w, waterY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // 5. Capillary Fringe limit line (-15 cm)
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(45, critY);
+      ctx.lineTo(w, critY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#b45309';
+      ctx.font = 'bold 9px sans-serif';
+      ctx.fillText('Capillary Limit (-15 cm)', w - 125, critY - 4);
+
+      // 6. ANIMATED FLUX ARROWS
+      animTimestamp += 0.05;
+      if (simZ > 0) {
+        // Ponded: Thick downward blue percolation arrows through plough pan
+        const numArrows = 5;
+        const arrowSpacing = (w - 140) / numArrows;
+        ctx.fillStyle = '#0284c7';
+        ctx.strokeStyle = '#0284c7';
+        ctx.lineWidth = 2.5;
+
+        for (let i = 0; i < numArrows; i++) {
+          const ax = 100 + i * arrowSpacing;
+          const offset = (animTimestamp * 40 + i * 25) % (plotBottomY - panY);
+          const ay = panY + offset;
+
+          ctx.beginPath();
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(ax, ay + 12);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(ax - 3.5, ay + 8);
+          ctx.lineTo(ax, ay + 14);
+          ctx.lineTo(ax + 3.5, ay + 8);
+          ctx.fill();
+        }
+
+        ctx.fillStyle = '#0369a1';
+        ctx.font = 'bold 9px sans-serif';
+        ctx.fillText('Hydrostatic Percolation Head (DP ~ 3.8 mm/d)', 130, panY + 20);
+      } else if (simZ >= -15.0) {
+        // Safe AWD: Upward cyan capillary fringe arrows feeding roots
+        const numArrows = 5;
+        const arrowSpacing = (w - 140) / numArrows;
+        ctx.fillStyle = '#06b6d4';
+        ctx.strokeStyle = '#06b6d4';
+        ctx.lineWidth = 2.2;
+
+        for (let i = 0; i < numArrows; i++) {
+          const ax = 100 + i * arrowSpacing;
+          const rangeH = Math.max(20, waterY - surfaceY);
+          const offset = (animTimestamp * 35 + i * 20) % rangeH;
+          const ay = waterY - offset;
+
+          if (ay > surfaceY + 10) {
+            ctx.beginPath();
+            ctx.moveTo(ax, ay);
+            ctx.lineTo(ax, ay - 12);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(ax - 3.5, ay - 8);
+            ctx.lineTo(ax, ay - 14);
+            ctx.lineTo(ax + 3.5, ay - 8);
+            ctx.fill();
+          }
+        }
+
+        ctx.fillStyle = '#0e7490';
+        ctx.font = 'bold 9px sans-serif';
+        ctx.fillText('Upward Capillary Fringe Flux (Replenishing 0 to -18 cm Roots)', 110, Math.min(critY + 16, waterY - 8));
+      } else {
+        ctx.fillStyle = '#b91c1c';
+        ctx.font = 'bold 10px sans-serif';
+        ctx.fillText('⚡ CAPILLARY CONTINUITY BROKEN: Hydraulic Contact Severed', 80, critY + 16);
+      }
+
+      // 7. Rice Plant Hill at x = 140
+      const plantX = 140;
+      const rootColor = isStressed ? '#b45309' : '#fef3c7';
+      ctx.strokeStyle = rootColor;
+      ctx.lineWidth = 1.6;
+      const rootDepthY = depthToY(-18.0);
+
+      const rootOffsets = [-24, -16, -8, 0, 8, 16, 24];
+      rootOffsets.forEach((rx, idx) => {
+        ctx.beginPath();
+        ctx.moveTo(plantX, surfaceY);
+        ctx.quadraticCurveTo(plantX + rx * 0.5, surfaceY + 25, plantX + rx, rootDepthY - (idx % 3) * 10);
+        ctx.stroke();
+      });
+
+      // Stem & Green Shoots
+      ctx.strokeStyle = '#15803d';
+      ctx.lineWidth = 2.4;
+      const shootTopY = depthToY(9.5);
+      const shootOffsets = [-18, -10, 0, 10, 18];
+      shootOffsets.forEach(sx => {
+        ctx.beginPath();
+        ctx.moveTo(plantX, surfaceY);
+        ctx.quadraticCurveTo(plantX + sx * 0.6, surfaceY - 25, plantX + sx, shootTopY + Math.abs(sx) * 0.8);
+        ctx.stroke();
+      });
+
+      ctx.fillStyle = '#14532d';
+      ctx.font = 'bold 9px sans-serif';
+      ctx.fillText('Rice Hill', plantX - 18, surfaceY - 35);
+
+      // 8. PVC Pani Pipe (T3) at x = 280
+      const pipeX = 280, pipeW = 30;
+      const pipeTopY = depthToY(10.0);
+      const pipeBottomY = depthToY(-15.0);
+
+      ctx.fillStyle = '#f8fafc';
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.8;
+      ctx.fillRect(pipeX, pipeTopY, pipeW, pipeBottomY - pipeTopY);
+      ctx.strokeRect(pipeX, pipeTopY, pipeW, pipeBottomY - pipeTopY);
+
+      // Perforations
+      ctx.fillStyle = '#1e293b';
+      for (let py = surfaceY + 12; py < pipeBottomY - 8; py += 15) {
+        ctx.beginPath();
+        ctx.arc(pipeX + 9, py, 2.0, 0, Math.PI * 2);
+        ctx.arc(pipeX + 21, py, 2.0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Water inside tube
+      const innerWaterY = Math.max(pipeTopY, Math.min(pipeBottomY, waterY));
+      ctx.fillStyle = 'rgba(2, 132, 199, 0.65)';
+      ctx.fillRect(pipeX + 2, innerWaterY, pipeW - 4, pipeBottomY - innerWaterY);
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 9px sans-serif';
+      ctx.fillText('Pani Pipe', pipeX - 6, pipeTopY - 5);
+
+      // 9. Capacitive Probe (T4) at x = 370
+      const probeX = 370;
+      ctx.fillStyle = '#334155';
+      ctx.fillRect(probeX - 10, surfaceY - 16, 20, 16);
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillRect(probeX - 7, surfaceY - 12, 14, 8);
+
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 2.0;
+      ctx.beginPath();
+      ctx.moveTo(probeX - 5, surfaceY);
+      ctx.lineTo(probeX - 5, critY);
+      ctx.moveTo(probeX + 5, surfaceY);
+      ctx.lineTo(probeX + 5, critY);
+      ctx.stroke();
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 9px sans-serif';
+      ctx.fillText('Capacitive Probe', probeX - 25, surfaceY - 20);
+
+      // 10. Depth Ruler on Left (0 to 45 px)
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(0, 0, 45, h);
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = '9px monospace';
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.0;
+
+      for (let d = topDepth; d >= bottomDepth; d -= 1.0) {
+        const dy = depthToY(d);
+        const isMajor = Math.abs(d) % 5 === 0;
+        ctx.beginPath();
+        ctx.moveTo(isMajor ? 24 : 34, dy);
+        ctx.lineTo(44, dy);
+        ctx.stroke();
+
+        if (isMajor) {
+          const label = (d > 0 ? '+' : '') + d + 'cm';
+          ctx.fillText(label, 3, dy + 3);
+        }
+      }
+
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 2.0;
+      ctx.beginPath();
+      ctx.moveTo(45, surfaceY);
+      ctx.lineTo(w, surfaceY);
+      ctx.stroke();
+    }
+
+    function updateAssayLab(z) {
+      const pro = calcProline(z);
+      const rwc = calcRWC(z);
+      const spad = calcSPAD(z);
+
+      const abs520 = (pro * 0.0866).toFixed(3);
+      document.getElementById('lcd-abs').innerText = abs520;
+      document.getElementById('lcd-proline').innerText = pro.toFixed(2);
+
+      const cuvette = document.getElementById('cuvette-liquid');
+      const cuvetteLbl = document.getElementById('cuvette-label');
+      const proStatus = document.getElementById('lcd-proline-status');
+
+      if (pro <= 2.2) {
+        cuvette.style.backgroundColor = 'rgba(254, 205, 211, 0.75)';
+        cuvetteLbl.innerText = 'Pale Baseline Pink';
+        proStatus.className = 'mt-0.5 text-[10px] font-semibold text-emerald-400';
+        proStatus.innerText = 'NS — Baseline (Zero Stress)';
+      } else if (pro <= 4.0) {
+        cuvette.style.backgroundColor = 'rgba(244, 63, 94, 0.85)';
+        cuvetteLbl.innerText = 'Vibrant Rose-Red';
+        proStatus.className = 'mt-0.5 text-[10px] font-semibold text-amber-400';
+        proStatus.innerText = 'Moderate Osmolyte Accumulation';
+      } else {
+        cuvette.style.backgroundColor = 'rgba(159, 18, 57, 0.95)';
+        cuvetteLbl.innerText = 'Deep Crimson-Red (Surge)';
+        proStatus.className = 'mt-0.5 text-[10px] font-semibold text-red-400 animate-pulse';
+        proStatus.innerText = 'CRITICAL STRESS: Proline Surge > 300%';
+      }
+
+      document.getElementById('val-spad').innerText = spad.toFixed(1);
+      document.getElementById('bar-spad').style.width = ((spad / 50.0) * 100) + '%';
+
+      document.getElementById('val-rwc').innerText = rwc.toFixed(1) + '%';
+      document.getElementById('bar-rwc').style.width = rwc.toFixed(1) + '%';
+
+      const cellLbl = document.getElementById('lbl-cell-state');
+      if (rwc >= 82.0) {
+        cellLbl.className = 'text-[9px] font-bold text-emerald-400 mt-0.5';
+        cellLbl.innerText = 'Turgid Mesophyll';
+      } else if (rwc >= 75.0) {
+        cellLbl.className = 'text-[9px] font-bold text-amber-400 mt-0.5';
+        cellLbl.innerText = 'Mild Flaccidity';
+      } else {
+        cellLbl.className = 'text-[9px] font-bold text-red-400 mt-0.5 animate-pulse';
+        cellLbl.innerText = 'Severe Wilting';
+      }
+
+      renderMesophyllCells(rwc >= 80.0);
+    }
+
+    function renderMesophyllCells(isTurgid) {
+      const svg = document.getElementById('svg-cells');
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const cellColor = isTurgid ? '#22c55e' : '#f59e0b';
+      const cellFill = isTurgid ? 'rgba(34, 197, 94, 0.35)' : 'rgba(217, 119, 6, 0.25)';
+      const r = isTurgid ? 14 : 9;
+
+      const centers = [
+        [30, 25], [65, 25], [100, 25],
+        [47, 55], [82, 55]
+      ];
+
+      centers.forEach(([cx, cy]) => {
+        let pts = '';
+        for (let a = 0; a < 6; a++) {
+          const angle = (Math.PI / 3) * a;
+          const px = cx + r * Math.cos(angle);
+          const py = cy + r * Math.sin(angle);
+          pts += (a === 0 ? `${px},${py}` : ` ${px},${py}`);
+        }
+        svg.innerHTML += `<polygon points="${pts}" fill="${cellFill}" stroke="${cellColor}" stroke-width="1.8"/>`;
+        const vacR = isTurgid ? 5 : 2;
+        svg.innerHTML += `<circle cx="${cx}" cy="${cy}" r="${vacR}" fill="${cellColor}" opacity="0.6"/>`;
+      });
+    }
+
+    function startAnimation() {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      function loop() {
+        renderCanvas();
+        animFrameId = requestAnimationFrame(loop);
+      }
+      animFrameId = requestAnimationFrame(loop);
+    }
+
+    // ========================================================================
+    // 21-PLOT FIELD MAP
+    // ========================================================================
+    function setHeatmapMetric(metric) {
+      currentHeatmapMetric = metric;
+      const metrics = ['irrigation_mm', 'water_productivity_kg_m3', 'grain_yield_tha', 'proline_umol_g'];
+      metrics.forEach(m => {
+        const btn = document.getElementById('btn-heat-' + (m === 'irrigation_mm' ? 'irr' : (m === 'water_productivity_kg_m3' ? 'wp' : (m === 'grain_yield_tha' ? 'yield' : 'proline'))));
+        if (btn) {
+          btn.className = (m === metric) ?
+            'px-2.5 py-1 text-xs font-semibold bg-stone-900 text-white rounded' :
+            'px-2.5 py-1 text-xs font-semibold bg-white text-stone-800 hover:bg-stone-100 rounded border border-stone-300';
+        }
+      });
+
+      const vals = ALL_PLOTS.map(p => p[metric]);
+      const minV = Math.min(...vals), maxV = Math.max(...vals);
+      document.getElementById('legend-min-lbl').innerText = minV.toFixed(2);
+      document.getElementById('legend-max-lbl').innerText = maxV.toFixed(2);
+
+      populatePlotsGrid();
+    }
+
+    function getHeatmapColor(val, minV, maxV) {
+      const norm = Math.max(0, Math.min(1, (val - minV) / (maxV - minV || 1)));
+      if (currentHeatmapMetric === 'irrigation_mm') {
+        const g = Math.round(220 * (1 - norm) + 40);
+        const r = Math.round(220 * norm + 35);
+        return `rgba(${r}, ${g}, 80, 0.28)`;
+      } else if (currentHeatmapMetric === 'proline_umol_g') {
+        return norm > 0.3 ? 'rgba(220, 38, 38, 0.35)' : 'rgba(34, 197, 94, 0.25)';
+      } else {
+        const g = Math.round(200 * norm + 45);
+        const b = Math.round(180 * (1 - norm) + 60);
+        return `rgba(30, ${g}, ${b}, 0.32)`;
+      }
+    }
+
+    function populatePlotsGrid() {
+      const container = document.getElementById('plots-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const vals = ALL_PLOTS.map(p => p[currentHeatmapMetric]);
+      const minV = Math.min(...vals), maxV = Math.max(...vals);
+
+      const blocks = ['R1', 'R2', 'R3', 'R4', 'R5'];
+      blocks.forEach(blk => {
+        const blkRow = document.createElement('div');
+        blkRow.className = 'space-y-1.5';
+
+        const blkLabel = document.createElement('div');
+        blkLabel.className = 'text-[11px] font-bold text-stone-500 uppercase tracking-wider flex justify-between';
+        blkLabel.innerHTML = `<span>Block ${blk} (Replication)</span><span class="text-[10px] text-stone-400 font-normal">Plots randomized</span>`;
+        blkRow.appendChild(blkLabel);
+
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-4 gap-2';
+
+        const blkPlots = ALL_PLOTS.filter(p => p.block === blk);
+        blkPlots.forEach(p => {
+          const card = document.createElement('div');
+          const isSelected = p.plot_id === selectedPlotId;
+          const bgCol = getHeatmapColor(p[currentHeatmapMetric], minV, maxV);
+
+          const trtTag = {
+            'T1': 'text-red-700 bg-red-100',
+            'T2': 'text-blue-700 bg-blue-100',
+            'T3': 'text-emerald-700 bg-emerald-100',
+            'T4': 'text-purple-700 bg-purple-100'
+          };
+
+          card.className = `cursor-pointer p-2.5 rounded-lg border transition ${isSelected ? 'ring-2 ring-stone-900 border-stone-900 shadow-sm' : 'border-stone-200 hover:border-stone-400'}`;
+          card.style.backgroundColor = bgCol;
+          card.onclick = () => selectPlot(p.plot_id);
+
+          const metricVal = p[currentHeatmapMetric].toFixed(2);
+          card.innerHTML = `
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-bold text-stone-900">Plot #${p.plot_id}</span>
+              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded ${trtTag[p.treatment]}">${p.treatment}</span>
+            </div>
+            <div class="text-[11px] flex justify-between items-baseline mt-1">
+              <span class="text-stone-500 text-[10px]">Val:</span>
+              <strong class="text-stone-900 table-numeric font-bold">${metricVal}</strong>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        blkRow.appendChild(grid);
+        container.appendChild(blkRow);
+      });
+
+      renderValidationPlot21Card();
+    }
+
+    function renderValidationPlot21Card() {
+      const p21Container = document.getElementById('plot21-card-container');
+      if (!p21Container) return;
+
+      const p21 = ALL_PLOTS.find(p => p.plot_id === 21);
+      if (!p21) return;
+
+      const isSelected = selectedPlotId === 21;
+      p21Container.innerHTML = `
+        <div class="p-3 rounded-xl border-2 ${plot21Spotlight ? 'border-amber-400 star-glow bg-amber-50/70' : 'border-stone-300 bg-stone-100'} cursor-pointer transition ${isSelected ? 'ring-2 ring-amber-600' : ''}"
+             onclick="selectPlot(21)">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-black text-amber-900">⭐ Validation Scenario #21 (Simulated Test Plot)</span>
+              <span class="px-2 py-0.2 rounded text-[10px] font-bold bg-amber-200 text-amber-900">Calibrated -15 cm AWD</span>
+            </div>
+            <span class="text-xs font-bold text-stone-800">WP: ${p21.water_productivity_kg_m3.toFixed(2)} kg/m³</span>
+          </div>
+          <div class="text-[11px] text-stone-600 mt-1 flex justify-between">
+            <span>Irrigation: <strong>${p21.irrigation_mm.toFixed(1)} mm (27.0% saved)</strong></span>
+            <span>Grain Yield: <strong>${p21.grain_yield_tha.toFixed(2)} t/ha</strong></span>
+            <span>Proline: <strong>${p21.proline_umol_g.toFixed(2)} µmol/g</strong></span>
+          </div>
+        </div>
+      `;
+    }
+
+    function togglePlot21Spotlight() {
+      plot21Spotlight = !plot21Spotlight;
+      const btn = document.getElementById('btn-spotlight');
+      btn.className = plot21Spotlight ?
+        'inline-flex items-center px-3 py-1.5 rounded-md text-xs font-bold bg-amber-500 text-white shadow-sm transition' :
+        'inline-flex items-center px-3 py-1.5 rounded-md text-xs font-bold bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 transition';
+
+      const boxP21 = document.getElementById('box-plot21-spotlight-summary');
+      if (boxP21) boxP21.classList.toggle('hidden', !plot21Spotlight);
+
+      selectPlot(21);
+      renderValidationPlot21Card();
+    }
+
+    function selectPlot(plotId) {
+      selectedPlotId = plotId;
+      const plot = ALL_PLOTS.find(p => p.plot_id === plotId);
+      if (!plot) return;
+
+      document.getElementById('tel-title').innerText = `Plot #${plot.plot_id} (${plot.block})`;
+      document.getElementById('tel-badge-trt').innerText = `${plot.treatment}: ${plot.treatment_name}`;
+      document.getElementById('tel-wp').innerText = `${plot.water_productivity_kg_m3.toFixed(2)} kg/m³`;
+      document.getElementById('tel-irr').innerText = `${plot.irrigation_mm.toFixed(1)} mm`;
+      document.getElementById('tel-sav').innerText = `${plot.water_savings_pct.toFixed(1)}% vs T1`;
+      document.getElementById('tel-yield').innerText = `${plot.grain_yield_tha.toFixed(2)} t/ha`;
+      document.getElementById('tel-tillers').innerText = `${plot.effective_tillers_hill.toFixed(1)} / hill`;
+      document.getElementById('tel-pan').innerText = `${plot.panicle_length_cm.toFixed(1)} cm`;
+      document.getElementById('tel-gw').innerText = `${plot.test_weight_1000_g.toFixed(2)} g`;
+      document.getElementById('tel-hi').innerText = `${plot.harvest_index_pct.toFixed(1)}%`;
+      document.getElementById('tel-rwc').innerText = `${plot.rwc_pct.toFixed(1)}%`;
+      document.getElementById('tel-proline').innerText = `${plot.proline_umol_g.toFixed(2)} µmol/g`;
+
+      renderMiniSawtooth(plot.treatment);
+      populatePlotsGrid();
+    }
+
+    function renderMiniSawtooth(trt) {
+      const svg = document.getElementById('tel-mini-sawtooth');
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const colKey = trt === 'T1' ? 't1_z_cm' : (trt === 'T2' ? 't2_z_cm' : (trt === 'T3' ? 't3_z_cm' : 't4_z_cm'));
+      const w = 300, h = 80;
+      const mapX = day => (day / 110) * w;
+      const mapY = z => 20 + ((6.5 - z) / 24.5) * 55;
+
+      const surfY = mapY(0);
+      svg.innerHTML += `<line x1="0" y1="${surfY}" x2="${w}" y2="${surfY}" stroke="#cbd5e1" stroke-width="1"/>`;
+
+      const fX1 = mapX(58), fX2 = mapX(72);
+      svg.innerHTML += `<rect x="${fX1}" y="0" width="${fX2 - fX1}" height="${h}" fill="rgba(245, 158, 11, 0.18)"/>`;
+
+      let pathD = '';
+      DAILY_DATA.forEach((d, idx) => {
+        const px = mapX(d.day);
+        const py = mapY(d[colKey]);
+        pathD += (idx === 0 ? `M ${px} ${py}` : ` L ${px} ${py}`);
+      });
+
+      const strokeCol = trt === 'T1' ? '#b91c1c' : (trt === 'T2' ? '#1d4ed8' : (trt === 'T3' ? '#15803d' : '#7e22ce'));
+      svg.innerHTML += `<path d="${pathD}" fill="none" stroke="${strokeCol}" stroke-width="1.8"/>`;
+    }
+
+    // ========================================================================
+    // JUDGE'S CHALLENGE & PARETO CURVE
+    // ========================================================================
+    function onJudgeSliderInput(depth) {
+      document.getElementById('judge-slider-depth').value = depth;
+      document.getElementById('judge-chosen-lbl').innerText = (depth > 0 ? '+' : '') + depth.toFixed(1) + ' cm';
+      runJudgeSimulation();
+    }
+
+    function runJudgeSimulation() {
+      const depth = parseInt(document.getElementById('judge-slider-depth').value);
+      const sweepPt = SWEEP_DATA.find(pt => Math.abs(pt.threshold_cm - depth) < 0.5) || SWEEP_DATA[15];
+
+      document.getElementById('judge-score-sav').innerText = sweepPt.water_saved_pct.toFixed(1) + '%';
+      document.getElementById('judge-score-irr').innerText = sweepPt.irrigation_mm.toFixed(1) + ' mm seasonal';
+      document.getElementById('judge-score-yield').innerText = sweepPt.grain_yield_tha.toFixed(2) + ' t/ha';
+      document.getElementById('judge-score-loss').innerText = sweepPt.yield_loss_pct > 0.5 ?
+        `${sweepPt.yield_loss_pct.toFixed(1)}% yield loss` : '0.0% loss (Parity)';
+      document.getElementById('judge-score-wp').innerText = sweepPt.water_productivity_kg_m3.toFixed(2) + ' kg/m³';
+      document.getElementById('judge-score-rwc').innerText = sweepPt.rwc_pct.toFixed(1) + '%';
+      document.getElementById('judge-score-pro').innerText = sweepPt.proline_umol_g.toFixed(2);
+
+      const fringeLbl = document.getElementById('judge-score-fringe');
+      const verdict = document.getElementById('judge-verdict-card');
+
+      if (depth >= -10) {
+        fringeLbl.className = 'text-sm font-bold text-blue-700 block mt-1';
+        fringeLbl.innerText = 'Saturated / Over-Irrigated';
+        verdict.className = 'p-4 bg-blue-50 border border-blue-200 rounded-lg text-xs space-y-1 text-blue-950';
+        verdict.innerHTML = `
+          <div class="font-bold text-sm">SUB-OPTIMAL WATER PRODUCTIVITY</div>
+          <p class="leading-relaxed text-[11px]">
+            At <strong>${depth} cm</strong>, plant hydration is completely safe, but <strong>12% to 20% more groundwater</strong> is lost through deep percolation head. Water Productivity remains low (~1.00 to 1.15 kg/m³).
+          </p>
+        `;
+      } else if (depth >= -16) {
+        fringeLbl.className = 'text-sm font-bold text-emerald-700 block mt-1';
+        fringeLbl.innerText = 'BIOPHYSICAL SWEET SPOT';
+        verdict.className = 'p-4 bg-emerald-50 border border-emerald-300 rounded-lg text-xs space-y-1 text-emerald-950';
+        verdict.innerHTML = `
+          <div class="font-bold text-sm">GLOBAL BIOPHYSICAL OPTIMUM (-15 cm)</div>
+          <p class="leading-relaxed text-[11px]">
+            At <strong>${depth} cm</strong>, Water Productivity peaks at <strong>${sweepPt.water_productivity_kg_m3.toFixed(2)} kg/m³</strong> (+39% vs T1) with <strong>${sweepPt.water_saved_pct.toFixed(1)}% water saved</strong>, zero grain yield loss, and baseline proline (${sweepPt.proline_umol_g.toFixed(2)} µmol/g FW).
+          </p>
+        `;
+      } else {
+        fringeLbl.className = 'text-sm font-bold text-red-700 block mt-1 animate-pulse';
+        fringeLbl.innerText = 'Capillary Rupture / Stress';
+        verdict.className = 'p-4 bg-red-50 border border-red-300 rounded-lg text-xs space-y-1 text-red-950';
+        verdict.innerHTML = `
+          <div class="font-bold text-sm">SEVERE HYDRAULIC DISCONNECTION CLIFF</div>
+          <p class="leading-relaxed text-[11px]">
+            At <strong>${depth} cm</strong>, capillary continuity ruptures. Free proline surges to <strong>${sweepPt.proline_umol_g.toFixed(2)} µmol/g FW</strong> (> 300% osmotic shock), and grain yield collapses by <strong>${sweepPt.yield_loss_pct.toFixed(1)}%</strong> due to spikelet sterility.
+          </p>
+        `;
+      }
+
+      renderParetoCurve(depth);
+    }
+
+    function renderParetoCurve(judgeDepth = -15) {
+      const svg = document.getElementById('svg-pareto');
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const w = 520, h = 280, padX = 55, padY = 25;
+      const plotW = w - padX - 55, plotH = h - padY - 35;
+
+      const mapX = th => padX + (Math.abs(th) / 30.0) * plotW;
+      const mapWP = wp => padY + plotH - ((wp - 0.7) / 0.8) * plotH;
+      const mapPro = pro => padY + plotH - ((pro - 1.5) / 10.5) * plotH;
+
+      svg.innerHTML += `<line x1="${padX}" y1="${padY + plotH}" x2="${padX + plotW}" y2="${padY + plotH}" stroke="#94a3b8" stroke-width="1.2"/>`;
+      svg.innerHTML += `<line x1="${padX}" y1="${padY}" x2="${padX}" y2="${padY + plotH}" stroke="#94a3b8" stroke-width="1.2"/>`;
+      svg.innerHTML += `<line x1="${padX + plotW}" y1="${padY}" x2="${padX + plotW}" y2="${padY + plotH}" stroke="#94a3b8" stroke-width="1.2"/>`;
+
+      svg.innerHTML += `<text x="${padX + plotW / 2}" y="${h - 6}" font-size="9" fill="#334155" text-anchor="middle" font-weight="bold">AWD Reflood Trigger Depth (-cm below surface)</text>`;
+      svg.innerHTML += `<text x="16" y="${padY + plotH / 2}" font-size="9" fill="#15803d" text-anchor="middle" transform="rotate(-90, 16, ${padY + plotH / 2})" font-weight="bold">Water Productivity (kg/m³)</text>`;
+      svg.innerHTML += `<text x="${w - 12}" y="${padY + plotH / 2}" font-size="9" fill="#b91c1c" text-anchor="middle" transform="rotate(90, ${w - 12}, ${padY + plotH / 2})" font-weight="bold">Free Proline (µmol/g FW)</text>`;
+
+      const critX = mapX(-15.0);
+      svg.innerHTML += `<line x1="${critX}" y1="${padY}" x2="${critX}" y2="${padY + plotH}" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4,3"/>`;
+      svg.innerHTML += `<text x="${critX}" y="${padY + 12}" font-size="8" fill="#b45309" text-anchor="middle" font-weight="bold">-15 cm Capillary Boundary</text>`;
+
+      let wpPath = '';
+      SWEEP_DATA.forEach((pt, i) => {
+        const px = mapX(pt.threshold_cm);
+        const py = mapWP(pt.water_productivity_kg_m3);
+        wpPath += (i === 0 ? `M ${px} ${py}` : ` L ${px} ${py}`);
+      });
+      svg.innerHTML += `<path d="${wpPath}" fill="none" stroke="#15803d" stroke-width="2.4"/>`;
+
+      let proPath = '';
+      SWEEP_DATA.forEach((pt, i) => {
+        const px = mapX(pt.threshold_cm);
+        const py = mapPro(pt.proline_umol_g);
+        proPath += (i === 0 ? `M ${px} ${py}` : ` L ${px} ${py}`);
+      });
+      svg.innerHTML += `<path d="${proPath}" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-dasharray="5,3"/>`;
+
+      const p21X = mapX(-15.0), p21Y = mapWP(1.364);
+      svg.innerHTML += `<polygon points="${p21X},${p21Y-8} ${p21X+2.5},${p21Y-2} ${p21X+8},${p21Y-2} ${p21X+3},${p21Y+2} ${p21X+5},${p21Y+8} ${p21X},${p21Y+4} ${p21X-5},${p21Y+8} ${p21X-3},${p21Y+2} ${p21X-8},${p21Y-2} ${p21X-2.5},${p21Y-2}" fill="#f59e0b" stroke="#78350f" stroke-width="1.2"/>`;
+
+      const jSweep = SWEEP_DATA.find(pt => Math.abs(pt.threshold_cm - judgeDepth) < 0.5) || SWEEP_DATA[15];
+      const jX = mapX(judgeDepth);
+      const jY = mapWP(jSweep.water_productivity_kg_m3);
+
+      svg.innerHTML += `
+        <circle cx="${jX}" cy="${jY}" r="9" fill="none" stroke="#f59e0b" stroke-width="2" class="star-glow"/>
+        <circle cx="${jX}" cy="${jY}" r="5" fill="#f59e0b"/>
+        <text x="${jX}" y="${jY - 14}" font-size="8" fill="#78350f" text-anchor="middle" font-weight="bold">Judge: ${judgeDepth} cm</text>
+      `;
+    }
+
+    // ========================================================================
+    // PHENOLOGY SCRUBBER
+    // ========================================================================
+    function onPhenologyScrub(day) {
+      document.getElementById('lbl-scrub-day').innerText = `Day ${day} after Transplanting`;
+      const stageLbl = document.getElementById('lbl-scrub-stage');
+      const badgeGuard = document.getElementById('badge-guardrail');
+      const bannerGuard = document.getElementById('banner-flowering-alert');
+
+      if (day <= 15) {
+        stageLbl.innerText = 'Seedling Establishment (Kc = 1.05)';
+        badgeGuard.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-700 border border-stone-300';
+        badgeGuard.innerText = 'Guardrail: Standby';
+        bannerGuard.className = 'hidden';
+      } else if (day <= 42) {
+        stageLbl.innerText = 'Active Vegetative Tillering (Kc = 1.15) — AWD Active';
+        badgeGuard.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300';
+        badgeGuard.innerText = 'AWD Cycles Active (-15 cm)';
+        bannerGuard.className = 'hidden';
+      } else if (day <= 57) {
+        stageLbl.innerText = 'Panicle Initiation & Booting (Kc = 1.20)';
+        badgeGuard.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300';
+        badgeGuard.innerText = 'AWD Cycles Active (-15 cm)';
+        bannerGuard.className = 'hidden';
+      } else if (day <= 72) {
+        stageLbl.innerText = 'Critical Flowering & Anthesis (Kc = 1.25) — GUARDRAIL ENGAGED';
+        badgeGuard.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-xs';
+        badgeGuard.innerText = '🛡️ FLOWERING GUARDRAIL ACTIVE';
+        bannerGuard.className = 'p-4 bg-amber-50 border border-amber-300 rounded-lg text-xs text-amber-950 space-y-1 block';
+      } else if (day <= 100) {
+        stageLbl.innerText = 'Grain Filling & Milk/Dough Stage (Kc = 1.00 -> 0.90)';
+        badgeGuard.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300';
+        badgeGuard.innerText = 'AWD Cycles Resumed';
+        bannerGuard.className = 'hidden';
+      } else {
+        stageLbl.innerText = 'Terminal Ripening Drainage (Kc = 0.85) — Field Dried';
+        badgeGuard.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-stone-200 text-stone-800 border border-stone-400';
+        badgeGuard.innerText = 'Terminal Harvest Drainage';
+        bannerGuard.className = 'hidden';
+      }
+
+      const dayData = DAILY_DATA.find(d => d.day === day) || DAILY_DATA[0];
+      document.getElementById('pheno-t1-z').innerText = (dayData.t1_z_cm > 0 ? '+' : '') + dayData.t1_z_cm.toFixed(1) + ' cm';
+      document.getElementById('pheno-t2-z').innerText = (dayData.t2_z_cm > 0 ? '+' : '') + dayData.t2_z_cm.toFixed(1) + ' cm';
+      document.getElementById('pheno-t3-z').innerText = (dayData.t3_z_cm > 0 ? '+' : '') + dayData.t3_z_cm.toFixed(1) + ' cm';
+      document.getElementById('pheno-t4-z').innerText = (dayData.t4_z_cm > 0 ? '+' : '') + dayData.t4_z_cm.toFixed(1) + ' cm';
+    }
+
+    // ========================================================================
+    // SENSOR CALIBRATION & EXTENSION
+    // ========================================================================
+    function renderCalibrationCurve() {
+      const svg = document.getElementById('svg-calibration');
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const w = 320, h = 200, padX = 40, padY = 20;
+      const plotW = w - padX - 20, plotH = h - padY - 30;
+
+      svg.innerHTML += `<line x1="${padX}" y1="${padY + plotH}" x2="${padX + plotW}" y2="${padY + plotH}" stroke="#94a3b8" stroke-width="1.2"/>`;
+      svg.innerHTML += `<line x1="${padX}" y1="${padY}" x2="${padX}" y2="${padY + plotH}" stroke="#94a3b8" stroke-width="1.2"/>`;
+
+      svg.innerHTML += `<text x="${padX + plotW / 2}" y="${h - 6}" font-size="9" fill="#475569" text-anchor="middle" font-weight="bold">Sensor Output Voltage (V)</text>`;
+      svg.innerHTML += `<text x="12" y="${padY + plotH / 2}" font-size="9" fill="#475569" text-anchor="middle" transform="rotate(-90, 12, ${padY + plotH / 2})" font-weight="bold">θv (%)</text>`;
+
+      const mapV = v => padX + ((v - 1.0) / 2.0) * plotW;
+      const mapTh = th => padY + plotH - ((th - 15.0) / 35.0) * plotH;
+
+      let curveD = '';
+      for (let th = 18; th <= 48.5; th += 1) {
+        const v = 3.0 - (th / 48.5) * 1.6;
+        const px = mapV(v), py = mapTh(th);
+        curveD += (th === 18 ? `M ${px} ${py}` : ` L ${px} ${py}`);
+      }
+      svg.innerHTML += `<path d="${curveD}" fill="none" stroke="#7e22ce" stroke-width="2"/>`;
+
+      const opX = mapV(1.82), opY = mapTh(39.2);
+      svg.innerHTML += `<circle cx="${opX}" cy="${opY}" r="5" fill="#f59e0b" stroke="#78350f" stroke-width="1.5"/>`;
+      svg.innerHTML += `<text x="${opX + 8}" y="${opY - 4}" font-size="8" fill="#7e22ce" font-weight="bold">-15 cm Trigger (1.82 V)</text>`;
+    }
+
+    function simulateDryingCycle() {
+      if (dryingInterval) clearInterval(dryingInterval);
+      const btn = document.getElementById('btn-sim-drying');
+      btn.innerText = '⏳ Simulating Drying...';
+
+      let step = 0;
+      const cycleSteps = [
+        { z: 3.0, v: 1.25, th: 48.5 },
+        { z: -2.0, v: 1.42, th: 46.2 },
+        { z: -7.0, v: 1.58, th: 43.8 },
+        { z: -11.0, v: 1.70, th: 41.5 },
+        { z: -15.0, v: 1.82, th: 39.2 }
+      ];
+
+      dryingInterval = setInterval(() => {
+        if (step >= cycleSteps.length) {
+          clearInterval(dryingInterval);
+          btn.innerText = '▶ Simulate 5-Day Drying Cycle';
+          return;
+        }
+        const s = cycleSteps[step];
+        document.getElementById('cal-z').innerText = (s.z > 0 ? '+' : '') + s.z.toFixed(1) + ' cm';
+        document.getElementById('cal-v').innerText = s.v.toFixed(2) + ' V';
+        document.getElementById('cal-theta').innerText = s.th.toFixed(1) + '%';
+        step++;
+      }, 700);
+    }
+
+    function calculateSavings() {
+      const areaVal = parseFloat(document.getElementById('input-area').value) || 0;
+      const unit = document.getElementById('select-unit').value;
+      const pumpType = document.querySelector('input[name="pumpType"]:checked').value;
+
+      let ha = areaVal;
+      if (unit === 'bigha') ha = areaVal / 7.475;
+      else if (unit === 'katha') ha = areaVal / (7.475 * 20.0);
+      else if (unit === 'acre') ha = areaVal / 2.47105;
+
+      const m3PerHa = 1845.0;
+      const totalM3 = m3PerHa * ha;
+      const totalLitres = totalM3 * 1000.0;
+
+      document.getElementById('out-water-litres').innerText = Math.round(totalLitres).toLocaleString();
+      document.getElementById('out-water-m3').innerText = `(${totalM3.toFixed(1)} m³ preserved)`;
+
+      if (pumpType === 'electric') {
+        const kwhSaved = totalM3 * 0.35;
+        const inrSaved = kwhSaved * 3.50;
+        document.getElementById('out-cost-inr').innerText = '₹' + Math.round(inrSaved).toLocaleString();
+        document.getElementById('out-energy-saved').innerText = `${kwhSaved.toFixed(1)} kWh electricity saved`;
+      } else {
+        const dieselSaved = totalM3 * 0.28;
+        const inrSaved = dieselSaved * 92.50;
+        document.getElementById('out-cost-inr').innerText = '₹' + Math.round(inrSaved).toLocaleString();
+        document.getElementById('out-energy-saved').innerText = `${dieselSaved.toFixed(1)} Litres diesel saved`;
+      }
+
+      const ch4Kg = (135.0 * ha).toFixed(1);
+      const co2e = (3.78 * ha).toFixed(2);
+      document.getElementById('out-methane').innerHTML = `
+        Periodic soil aeration cuts methanogenesis by <strong>45%</strong>: saving <strong>${ch4Kg} kg CH₄</strong> (~${co2e} tonnes CO₂e carbon reduction on your land).
+      `;
+    }
+
+    function populateAnovaTable() {
+      const tbody = document.getElementById('anova-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = `
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Seasonal Irrigation Water (mm)</td><td class="py-2.5 px-3 text-right table-numeric">659.90a</td><td class="py-2.5 px-3 text-right table-numeric">609.40b</td><td class="py-2.5 px-3 text-right table-numeric">501.74c</td><td class="py-2.5 px-3 text-right table-numeric">475.38d</td><td class="py-2.5 px-3 text-right table-numeric">0.584</td><td class="py-2.5 px-3 text-right table-numeric">1.80</td><td class="py-2.5 px-3 text-right table-numeric">30455.6</td><td class="py-2.5 px-3 font-bold text-red-700">** (P &lt; 0.001)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Grain Yield (t/ha)</td><td class="py-2.5 px-3 text-right table-numeric">6.59b</td><td class="py-2.5 px-3 text-right table-numeric">6.62a</td><td class="py-2.5 px-3 text-right table-numeric">6.55c</td><td class="py-2.5 px-3 text-right table-numeric">6.60b</td><td class="py-2.5 px-3 text-right table-numeric">0.006</td><td class="py-2.5 px-3 text-right table-numeric">0.02</td><td class="py-2.5 px-3 text-right table-numeric">24.8</td><td class="py-2.5 px-3 font-bold text-stone-900">** (Parity &lt; 1%)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Irrigation Water Productivity (kg/m³)</td><td class="py-2.5 px-3 text-right table-numeric">1.00d</td><td class="py-2.5 px-3 text-right table-numeric">1.09c</td><td class="py-2.5 px-3 text-right table-numeric">1.31b</td><td class="py-2.5 px-3 text-right table-numeric">1.39a</td><td class="py-2.5 px-3 text-right table-numeric">0.001</td><td class="py-2.5 px-3 text-right table-numeric">0.004</td><td class="py-2.5 px-3 text-right table-numeric">22769.9</td><td class="py-2.5 px-3 font-bold text-red-700">** (P &lt; 0.001)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Leaf Relative Water Content (RWC %)</td><td class="py-2.5 px-3 text-right table-numeric">84.43a</td><td class="py-2.5 px-3 text-right table-numeric">84.44a</td><td class="py-2.5 px-3 text-right table-numeric">84.33a</td><td class="py-2.5 px-3 text-right table-numeric">84.44a</td><td class="py-2.5 px-3 text-right table-numeric">0.085</td><td class="py-2.5 px-3 text-right text-stone-500 font-bold">NS</td><td class="py-2.5 px-3 text-right table-numeric">0.68</td><td class="py-2.5 px-3 font-bold text-emerald-700">NS (P = 0.58)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Leaf Chlorophyll Index (SPAD)</td><td class="py-2.5 px-3 text-right table-numeric">40.25a</td><td class="py-2.5 px-3 text-right table-numeric">40.28a</td><td class="py-2.5 px-3 text-right table-numeric">40.17a</td><td class="py-2.5 px-3 text-right table-numeric">40.28a</td><td class="py-2.5 px-3 text-right table-numeric">0.077</td><td class="py-2.5 px-3 text-right text-stone-500 font-bold">NS</td><td class="py-2.5 px-3 text-right table-numeric">1.80</td><td class="py-2.5 px-3 font-bold text-emerald-700">NS (P = 0.20)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Leaf Free Proline (µmol/g FW)</td><td class="py-2.5 px-3 text-right table-numeric">1.92a</td><td class="py-2.5 px-3 text-right table-numeric">1.92a</td><td class="py-2.5 px-3 text-right table-numeric">1.92a</td><td class="py-2.5 px-3 text-right table-numeric">1.95a</td><td class="py-2.5 px-3 text-right table-numeric">0.014</td><td class="py-2.5 px-3 text-right text-stone-500 font-bold">NS</td><td class="py-2.5 px-3 text-right table-numeric">0.28</td><td class="py-2.5 px-3 font-bold text-emerald-700">NS (P = 0.84)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Effective Tillers per Hill</td><td class="py-2.5 px-3 text-right table-numeric">13.88b</td><td class="py-2.5 px-3 text-right table-numeric">13.92b</td><td class="py-2.5 px-3 text-right table-numeric">14.56a</td><td class="py-2.5 px-3 text-right table-numeric">14.62a</td><td class="py-2.5 px-3 text-right table-numeric">0.080</td><td class="py-2.5 px-3 text-right table-numeric">0.25</td><td class="py-2.5 px-3 text-right table-numeric">28.5</td><td class="py-2.5 px-3 font-bold text-red-700">** (AWD Stimulus)</td></tr>
+        <tr><td class="py-2.5 px-3 font-semibold text-stone-900">Plant Height at Harvest (cm)</td><td class="py-2.5 px-3 text-right table-numeric">100.56a</td><td class="py-2.5 px-3 text-right table-numeric">100.62a</td><td class="py-2.5 px-3 text-right table-numeric">100.44a</td><td class="py-2.5 px-3 text-right table-numeric">100.98a</td><td class="py-2.5 px-3 text-right table-numeric">0.255</td><td class="py-2.5 px-3 text-right text-stone-500 font-bold">NS</td><td class="py-2.5 px-3 text-right table-numeric">0.94</td><td class="py-2.5 px-3 font-bold text-stone-600">NS (P = 0.45)</td></tr>
+      `;
+    }
+
+    // Window Init
+    window.onload = function() {
+      onMasterDepthInput(-15.0);
+      startAnimation();
+      populatePlotsGrid();
+      selectPlot(4);
+      calculateSavings();
+      renderCalibrationCurve();
+      renderParetoCurve(-15);
+      populateAnovaTable();
+      onPhenologyScrub(65);
+    };
+  </script>
+</body>
+</html>
