@@ -14,7 +14,7 @@ def compute_capillary_stress_index(z_cm_series: np.ndarray, crit_depth_cm: float
       S(t) = max(0, (-15.0 - z(t)) / 15.0)
       S_bar = (1 / D) * sum(S(t))
     """
-    s_daily = np.maximum(0.0, (-crit_depth_cm - z_cm_series) / 15.0)
+    s_daily = np.maximum(0.0, (crit_depth_cm - z_cm_series) / 15.0)
     s_bar = float(np.mean(s_daily))
     return s_daily, s_bar
 

@@ -81,7 +81,7 @@ def calculate_two_way_rcbd_anova(df: pd.DataFrame, var_col: str) -> Dict[str, An
     else:
         sig_flag = "NS"
         
-    # Tukey HSD letter assignment
+    # Critical Difference (CD 0.05 / Fisher's LSD) post-hoc letter grouping
     sorted_trts = sorted(trt_dict.keys(), key=lambda k: trt_dict[k], reverse=True)
     letters = {}
     if sig_flag == "NS":

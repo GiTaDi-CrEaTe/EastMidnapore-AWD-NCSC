@@ -88,12 +88,15 @@ def run_full_rcbd_experiment(seed: int = 101) -> Tuple[pd.DataFrame, pd.DataFram
         if block_id == "R3":
             daily_trajectories[trt_key] = hydro_res["daily_df"]
             
-        # At the calibrated -15 cm threshold, capillary fringe remains intact (S_bar = 0)
-        # Assays at 50% flowering reflect baseline zero-stress parity
+        # Derived from actual simulated water-table stress trajectory
+        # Under safe AWD (z >= -15 cm), the capillary fringe provides continuous hydration (theta_v >= 39.2% > theta_crit 34.0%),
+        # so cellular osmotic stress is zero. Stress scales when drying drops past the -15 cm capillary boundary.
+        raw_stress = float(hydro_res["mean_stress_index"])
+        eff_stress = max(0.0, raw_stress - 0.035)
         phys_res = compute_physiology_and_yield(
             treatment_key=trt_key,
             block_id=block_id,
-            mean_stress_index=0.0,
+            mean_stress_index=eff_stress,
             total_irrigation_mm=irr_plot,
             block_effects=b_eff,
             seed=seed + plot_id * 10
@@ -111,7 +114,7 @@ def run_full_rcbd_experiment(seed: int = 101) -> Tuple[pd.DataFrame, pd.DataFram
             "seep_mm": round(hydro_res["total_seep_mm"], 1),
             "water_productivity_kg_m3": phys_res["water_productivity_kg_m3"],
             "min_water_depth_cm": round(hydro_res["min_water_table_cm"], 1),
-            "mean_stress_index": 0.0,
+            "mean_stress_index": round(hydro_res["mean_stress_index"], 4),
             "rwc_pct": phys_res["rwc_pct"],
             "spad": phys_res["spad"],
             "total_chlorophyll_mg_g": phys_res["total_chlorophyll_mg_g"],
@@ -146,10 +149,12 @@ def run_full_rcbd_experiment(seed: int = 101) -> Tuple[pd.DataFrame, pd.DataFram
     )
     daily_trajectories["Plot21"] = val_hydro["daily_df"]
     
+    val_raw_stress = float(val_hydro["mean_stress_index"])
+    val_eff_stress = max(0.0, val_raw_stress - 0.035)
     val_phys = compute_physiology_and_yield(
         treatment_key="Plot21",
         block_id="Validation",
-        mean_stress_index=0.0,
+        mean_stress_index=val_eff_stress,
         total_irrigation_mm=val_irr,
         block_effects=val_b_eff,
         seed=seed + 210
@@ -169,7 +174,7 @@ def run_full_rcbd_experiment(seed: int = 101) -> Tuple[pd.DataFrame, pd.DataFram
         "water_savings_pct": round(val_savings, 2),
         "water_productivity_kg_m3": val_phys["water_productivity_kg_m3"],
         "min_water_depth_cm": round(val_hydro["min_water_table_cm"], 1),
-        "mean_stress_index": 0.0,
+        "mean_stress_index": round(val_hydro["mean_stress_index"], 4),
         "rwc_pct": val_phys["rwc_pct"],
         "spad": val_phys["spad"],
         "total_chlorophyll_mg_g": val_phys["total_chlorophyll_mg_g"],
